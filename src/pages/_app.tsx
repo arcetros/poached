@@ -3,7 +3,7 @@ import "../../styles/globals.css"
 import type { AppProps } from "next/app"
 import React from "react"
 
-import Layout from "../components/common/layout/Layout"
+import { Layout } from "../components/common"
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

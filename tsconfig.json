@@ -14,17 +14,11 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@/src/*": ["src/*"]
+      "@/*": ["*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "types/**/*.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "prisma/prisma.js"
-  ],
+  "include": ["next-env.d.ts", "types/**/*.ts", "**/*.ts", "**/*.tsx", "prisma/prisma.js"],
   "exclude": ["node_modules"]
 }
