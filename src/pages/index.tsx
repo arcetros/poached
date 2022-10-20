@@ -4,6 +4,7 @@ import React from "react"
 import { FiSearch } from "react-icons/fi"
 
 import { Container } from "@/components/ui"
+import LoadingDots from "@/components/ui/Loading-dots/LoadingDots"
 import Modal from "@/components/ui/Modal"
 import { isValidHttpUrl } from "@/helpers/isValidHttp"
 
@@ -15,10 +16,12 @@ const Home: NextPage = () => {
   const router = useRouter()
   const { url } = router.query as QueryParam
   const [value, setValue] = React.useState<string>(url)
-  const [modal, setModal] = React.useState<boolean>(true)
+  const [modal, setModal] = React.useState<boolean>(false)
+  const [isRequested, setIsRequested] = React.useState<boolean>(false)
   const [recipeData, setRecipeData] = React.useState<any>(undefined)
 
   async function fetchRecipe(targetUrl: string) {
+    setIsRequested(true)
     try {
       await fetch("/api/scrap", {
         method: "POST",
@@ -32,6 +35,7 @@ const Home: NextPage = () => {
         .then((data) => {
           setRecipeData(data)
           setModal(true)
+          setIsRequested(false)
         })
     } catch (err) {
       console.log(err)
@@ -43,9 +47,9 @@ const Home: NextPage = () => {
     const query: { url: string } = { url: value }
     if (value.length > 0 && isValidHttpUrl(query.url)) {
       setRecipeData(undefined)
-      setValue("")
       router.push({ pathname: "/", query: `url=${decodeURI(query.url)}` })
-      fetchRecipe(url)
+      fetchRecipe(query.url)
+      setValue("")
     } else {
       console.error("Make sure you entered the correct url")
     }
@@ -57,7 +61,6 @@ const Home: NextPage = () => {
 
   React.useEffect(() => {
     if (url) {
-      setModal(true)
       fetchRecipe(url)
     }
   }, [url])
@@ -85,8 +88,13 @@ const Home: NextPage = () => {
             className="h-full w-[calc(100%-75px)] rounded-3xl bg-transparent pl-4 text-sm focus:outline-none md:w-[calc(100%-120px)] md:pl-12"
             placeholder="https://example.com/creamy-courgette-potato-bake"
           />
-          <button className="absolute right-1 top-1/2 -translate-y-1/2 rounded-3xl bg-[#48bc873a] py-2.5 px-2.5 text-sm text-black transition duration-200 ease-out hover:bg-[#66ffba3a] md:px-6">
-            <span className="hidden text-[#61d09e] md:block">Search</span>
+          <button
+            className="absolute right-1 top-1/2 -translate-y-1/2 rounded-3xl bg-[#48bc873a] py-2.5 px-2.5 text-sm text-black transition duration-200 ease-out hover:bg-[#66ffba3a] disabled:cursor-not-allowed md:px-6"
+            disabled={isRequested}
+          >
+            <span className="hidden text-[#61d09e] md:block">
+              {isRequested ? <LoadingDots /> : "Search"}
+            </span>
             <FiSearch className="block h-4 w-4 text-[#61d09e] md:hidden" />
           </button>
         </form>
