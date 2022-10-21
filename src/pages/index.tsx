@@ -1,11 +1,11 @@
 import type { NextPage } from "next"
 import { useRouter } from "next/router"
 import React from "react"
-import { FiSearch } from "react-icons/fi"
+import { FiInfo, FiSearch } from "react-icons/fi"
 
+import RecipeData from "@/components/recipe/RecipeData"
 import { Container } from "@/components/ui"
 import LoadingDots from "@/components/ui/Loading-dots/LoadingDots"
-import Modal from "@/components/ui/Modal"
 import { isValidHttpUrl } from "@/helpers/isValidHttp"
 
 type QueryParam = {
@@ -66,17 +66,15 @@ const Home: NextPage = () => {
   }, [url])
 
   return (
-    <>
-      <Container className="mx-auto flex h-screen flex-col items-center justify-center text-gray-100">
-        <div className="flex w-full flex-col items-start justify-start md:mx-auto lg:items-center lg:justify-center">
-          <h2 className="text-sm font-light text-gray-300 md:text-base">
-            Get started with carpe-retractum
-          </h2>
-          <h1 className="mt-2 text-2xl font-bold md:text-4xl">What are you looking up-to?</h1>
-        </div>
+    <Container className="mx-auto flex flex-col gap-y-8 divide-y">
+      <div>
+        <h1 className="text-2xl font-bold md:text-4xl">carpe-retractum</h1>
+        <h2 className="mt-2 text-gray-600">
+          Generate recipe without clutters from various websites with an ease.
+        </h2>
         <form
           onSubmit={handleSubmitForm}
-          className="relative mx-auto mt-8 inline-flex h-12 w-full rounded-3xl bg-dark-2 lg:w-[75%]"
+          className="relative mx-auto mt-4 h-12 w-full rounded-3xl bg-gray-100"
         >
           <FiSearch className="absolute left-5 top-1/2 hidden h-4 w-4 -translate-y-1/2 md:block" />
           <input
@@ -89,22 +87,30 @@ const Home: NextPage = () => {
             placeholder="https://example.com/creamy-courgette-potato-bake"
           />
           <button
-            className="absolute right-1 top-1/2 -translate-y-1/2 rounded-3xl bg-[#48bc873a] py-2.5 px-2.5 text-sm text-black transition duration-200 ease-out hover:bg-[#66ffba3a] disabled:cursor-not-allowed md:px-6"
+            className="absolute right-1 top-1/2 -translate-y-1/2 rounded-3xl bg-[#8df1a6cf] py-2.5 px-2.5 text-sm text-black transition duration-200 ease-out hover:bg-[#7cd492cf] disabled:cursor-not-allowed md:px-6"
             disabled={isRequested}
           >
-            <span className="hidden text-[#61d09e] md:block">
+            <span className="hidden text-[hsl(144,40%,36%)] md:block">
               {isRequested ? <LoadingDots /> : "Search"}
             </span>
-            <FiSearch className="block h-4 w-4 text-[#61d09e] md:hidden" />
+            <FiSearch className="block h-4 w-4 text-[hsl(144,40%,36%)] md:hidden" />
           </button>
         </form>
-      </Container>
-      {modal && (
-        <Modal onClose={onModalClose}>
-          {recipeData?.results ? recipeData?.results?.name : recipeData?.message}
-        </Modal>
-      )}
-    </>
+      </div>
+      <RecipeData data={recipeData} isRequested={isRequested} url={url} />
+      <div className="flex items-start pt-8">
+        <span className="rounded-full bg-[#4d68ff51] p-3">
+          <FiInfo className="h-6 w-6 text-[hsl(226,74%,58%)]" />
+        </span>
+        <div className="ml-3">
+          <b>Information</b>
+          <p className="text-sm">
+            The website u entered is not supported? open an <span className="underline">issue</span>{" "}
+            and we&apos;ll do our best to add it.
+          </p>
+        </div>
+      </div>
+    </Container>
   )
 }
 

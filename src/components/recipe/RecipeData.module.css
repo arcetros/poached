@@ -1,0 +1,88 @@
+.root {
+  @apply mt-12 block grid-flow-row-dense grid-cols-12 gap-x-24 gap-y-16 lg:grid;
+
+  & .recipe_head_layout {
+    @apply col-start-6 col-end-12 mt-12 mb-8 h-fit lg:mb-0;
+
+    & title {
+      @apply text-5xl font-bold lg:text-6xl;
+    }
+
+    & p {
+      @apply mt-8 text-base lg:text-lg;
+    }
+
+    & .actions {
+      @apply mt-6 flex items-center border-b border-black pb-7 lg:pb-12;
+
+      & .socials_wrapper {
+        @apply flex items-center gap-x-2;
+
+        & .social_icon {
+          @apply inline-flex h-11 w-11 items-center rounded-full border-2 border-black;
+        }
+      }
+    }
+  }
+  & .image_layout {
+    @apply relative col-start-1 col-end-6 row-start-1 row-end-auto mx-[calc(1.5rem*-1)] lg:mx-0;
+
+    & .layout_inner {
+      @apply left-0 top-0 w-full pt-[125%] lg:absolute;
+
+      & picture {
+        @apply absolute left-0 top-0 h-full w-full;
+      }
+    }
+  }
+  & .ingredients_layout {
+    @apply col-start-1 col-end-6 row-start-1 row-end-7 mt-12 lg:mt-0;
+
+    & .ingredients_wrapper {
+      @apply flex flex-col lg:sticky lg:top-8 lg:left-0 lg:mt-[calc(125%+3rem)] lg:h-[calc(100vh-11rem)];
+
+      & header {
+        @apply flex items-center justify-between;
+      }
+      & .ingredients_list {
+        @apply mt-4 grow divide-y overflow-auto;
+        & li {
+          @apply py-3;
+          & .ingredient {
+            @apply flex items-center;
+            & .image {
+              @apply relative h-11 w-11 rounded-full bg-gray-100;
+            }
+            & .content_wrapper {
+              @apply ml-4 mr-1 grow;
+              & .title {
+                @apply text-lg font-medium capitalize;
+              }
+              & .note {
+                @apply text-sm text-gray-500;
+              }
+            }
+            & .quantity {
+              @apply text-right text-lg font-medium lg:text-xl;
+            }
+          }
+        }
+      }
+    }
+  }
+  & .instructions_layout {
+    @apply col-start-6 col-end-12 mt-12 lg:mt-0;
+    & ol {
+      @apply mt-4;
+      & li {
+        @apply flex py-4 first:pt-2;
+        & .instruction_order {
+          @apply flex h-12 w-12 shrink-0 grow-0 basis-12 items-center justify-center rounded-full border-2 border-black;
+        }
+        & p {
+          @apply ml-4;
+        }
+      }
+    }
+  }
+}
