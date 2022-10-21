@@ -6,4 +6,15 @@
   body {
     @apply m-0 bg-white p-0 font-primary text-sm text-gray-900 antialiased md:text-base;
   }
+
+  .scroll::-webkit-scrollbar {
+    height: 0.125rem;
+    width: 2rem;
+    -webkit-appearance: none;
+  }
+
+  .scroll::-webkit-scrollbar-thumb {
+    background-color: black;
+    border: 0.9375rem solid white;
+  }
 }

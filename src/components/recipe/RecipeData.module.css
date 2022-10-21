@@ -44,20 +44,27 @@
       & header {
         @apply flex items-center justify-between;
       }
+
       & .ingredients_list {
         @apply mt-4 grow divide-y overflow-auto;
+
         & li {
           @apply py-3;
+
           & .ingredient {
             @apply flex items-center;
+
             & .image {
               @apply relative h-11 w-11 rounded-full bg-gray-100;
             }
+
             & .content_wrapper {
               @apply ml-4 mr-1 grow;
+
               & .title {
                 @apply text-lg font-medium capitalize;
               }
+
               & .note {
                 @apply text-sm text-gray-500;
               }

@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import extractDomain from "extract-domain"
 import Image from "next/image"
 import React from "react"
@@ -46,7 +47,7 @@ const RecipeInner: React.FunctionComponent<Props> = ({ data, url }) => {
           <header>
             <h5 className="text-2xl font-bold lg:text-3xl">Ingredients</h5>
           </header>
-          <ul className={s.ingredients_list}>
+          <ul className={clsx(s.ingredients_list, "scroll")}>
             {data.ingredients.map((item: string) => {
               return (
                 <li className="flex py-4 first:pt-2" key={item}>
