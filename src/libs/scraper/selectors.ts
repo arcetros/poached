@@ -1,0 +1,1 @@
+export const SUPPORTED_DOMAINS = ["dapurumami.com"]
