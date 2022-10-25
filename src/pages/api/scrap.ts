@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next"
 
+import { getRecipeResponse } from "@/libs/scraper/getRecipeResponse"
+
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   const { body } = request
 
@@ -9,6 +11,8 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
   }
 
   try {
+    const test = await getRecipeResponse(body)
+    console.log(test)
     const recipe = await fetch(`${process.env.MAIN_API}/api/search/?q=${body}`)
     const res = await recipe.json()
     response.status(200).send(res)

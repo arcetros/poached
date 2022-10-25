@@ -1,6 +1,7 @@
 import axios from "axios"
 import extractDomain from "extract-domain"
 
+import getRecipeData from "./getRecipeData"
 import { SUPPORTED_DOMAINS } from "./selectors"
 
 function isDomainSupported(domain: string) {
@@ -17,7 +18,10 @@ export async function getRecipeResponse(url: string) {
         return html
       })
     } else {
-      console.log("Alternative..")
+      return axios.get(url).then((response) => {
+        const html = response.data
+        return getRecipeData(html)
+      })
     }
   } else {
     throw new Error("Failed to parse domain")
