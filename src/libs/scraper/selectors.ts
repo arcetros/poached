@@ -45,3 +45,12 @@ export function getDirectionsFromSelector(html: string, selector: string) {
   })
   return directions
 }
+
+export const selectors: any = {
+  "dapurumami.com": {
+    titleSelector: "h1.title",
+    ingredientSelector: ".bahanResep > div > div",
+    directionsSelector: ".steps > .step p",
+    servingsSelector: ".textPorsi > strong"
+  }
+}

@@ -48,7 +48,6 @@ export default function getRecipeData(html: string) {
             }
 
             if (recipe) {
-              console.log(recipe.nutrition)
               try {
                 _recipe.name = decodeHTML(html, recipe.name)
 
@@ -140,5 +139,6 @@ export default function getRecipeData(html: string) {
       })
     }
   })
+  console.log(_recipe)
   return validateRecipe(_recipe)
 }

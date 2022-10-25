@@ -1,6 +1,7 @@
 import axios from "axios"
 import extractDomain from "extract-domain"
 
+import alternativeRecipeData from "./alternativeRecipeData"
 import getRecipeData from "./getRecipeData"
 import { SUPPORTED_DOMAINS } from "./selectors"
 
@@ -14,12 +15,12 @@ export async function getRecipeResponse(url: string) {
   if (parse) {
     if (isDomainSupported(parse)) {
       return axios.get(url).then((response) => {
-        const html = response.data
-        return html
+        const html = response.data as string
+        return alternativeRecipeData(parse, html)
       })
     } else {
       return axios.get(url).then((response) => {
-        const html = response.data
+        const html = response.data as string
         return getRecipeData(html)
       })
     }

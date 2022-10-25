@@ -11,14 +11,18 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
   }
 
   try {
-    const test = await getRecipeResponse(body)
-    console.log(test)
-    const recipe = await fetch(`${process.env.MAIN_API}/api/search/?q=${body}`)
-    const res = await recipe.json()
-    response.status(200).send(res)
-    return
-  } catch (err) {
-    response.status(400).send({ error: err })
-    return
+    const recipe = await getRecipeResponse(body)
+    response.status(200).send({
+      method: request.method,
+      status: true,
+      message: "success",
+      results: recipe
+    })
+  } catch (err: any) {
+    const error =
+      err.response?.status > 400
+        ? "Site not yet supported or forbidden to access this domain"
+        : err.message
+    response.status(400).send({ method: request.method, status: false, message: error })
   }
 }
