@@ -2,7 +2,7 @@
   @apply block grid-flow-row-dense grid-cols-12 gap-x-24 gap-y-16 lg:grid;
 
   & .recipe_head_layout {
-    @apply col-start-6 col-end-12 mt-12 mb-8 h-fit lg:mb-0;
+    @apply col-start-6 col-end-12 mt-8 mb-8 h-fit lg:mb-0;
 
     & h1 {
       @apply text-3xl font-bold lg:text-6xl;
@@ -30,7 +30,7 @@
   }
 
   & .image_layout {
-    @apply relative col-start-1 col-end-6 row-start-1 row-end-auto mx-[calc(1.5rem*-0.7)] mt-12 lg:mx-0;
+    @apply relative col-start-1 col-end-6 row-start-1 row-end-auto mx-[calc(1.5rem*-0.7)] mt-8 lg:mx-0;
 
     & .layout_inner {
       @apply left-0 top-0 w-full pt-[125%] lg:absolute;

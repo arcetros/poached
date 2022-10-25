@@ -13,6 +13,7 @@
   "dependencies": {
     "@fontsource/inter": "^4.5.14",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+    "cheerio": "^1.0.0-rc.12",
     "clsx": "^1.2.1",
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "extract-domain": "^2.4.8",

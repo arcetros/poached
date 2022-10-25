@@ -36,7 +36,8 @@ export const getStaticProps: GetStaticProps = async () => {
         origin: _stats.html_url,
         forkUrl: "https://github.com/arcetros/transcendent/fork"
       }
-    }
+    },
+    revalidate: 10
   }
 }
 
@@ -90,8 +91,8 @@ export default function Home({ stats }: HomePageProps) {
 
   return (
     <Container className="m-auto flex flex-col gap-y-8 divide-y">
-      <div>
-        <div className="flex flex-col items-start justify-between lg:flex-row lg:items-center">
+      <header>
+        <div className="flex flex-col items-start justify-between lg:flex-row   lg:items-center">
           <h1 className="text-2xl font-bold md:text-4xl">transcendent</h1>
           <div className="mt-1 flex space-x-3 lg:mt-0 lg:ml-3">
             <a
@@ -141,7 +142,7 @@ export default function Home({ stats }: HomePageProps) {
             <FiSearch className="block h-4 w-4 text-[hsl(144,40%,36%)] md:hidden" />
           </button>
         </form>
-      </div>
+      </header>
       <RecipeData data={recipeData} isRequested={isRequested} url={url} />
       <div className="flex items-start pt-8">
         <span className="rounded-full bg-[#4d68ff51] p-3">
