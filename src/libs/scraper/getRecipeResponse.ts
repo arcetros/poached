@@ -1,12 +1,15 @@
 import axios from "axios"
 import extractDomain from "extract-domain"
 
-import alternativeRecipeData from "./alternativeRecipeData"
+import { allrecipes } from "./domain-scrapers"
 import getRecipeData from "./getRecipeData"
-import { SUPPORTED_DOMAINS } from "./selectors"
+
+const domains: any = {
+  "allrecipes.com": allrecipes
+}
 
 function isDomainSupported(domain: string) {
-  return SUPPORTED_DOMAINS.find((d) => d === domain) !== undefined
+  return Object.keys(domains).find((d) => d === domain) !== undefined
 }
 
 export async function getRecipeResponse(url: string) {
@@ -14,10 +17,14 @@ export async function getRecipeResponse(url: string) {
 
   if (parse) {
     if (isDomainSupported(parse)) {
-      return axios.get(url).then((response) => {
-        const html = response.data as string
-        return alternativeRecipeData(parse, html)
-      })
+      if (domains[parse] !== undefined) {
+        return axios.get(url).then((response) => {
+          const html = response.data
+          return domains[parse](html)
+        })
+      } else {
+        throw new Error("Site is not yet supported")
+      }
     } else {
       return axios.get(url).then((response) => {
         const html = response.data as string

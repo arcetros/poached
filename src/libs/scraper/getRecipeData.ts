@@ -1,7 +1,9 @@
 import * as cheerio from "cheerio"
 
+import { RecipeProps } from "@/types"
+
 import { parsePTTime } from "./parsePTTime"
-import { Recipe, RecipeProps } from "./Recipe"
+import { Recipe } from "./Recipe"
 import { getDescriptionFromSelector, getImageFromSelector } from "./selectors"
 import validateRecipe from "./validateRecipe"
 
@@ -139,6 +141,5 @@ export default function getRecipeData(html: string) {
       })
     }
   })
-  console.log(_recipe)
   return validateRecipe(_recipe)
 }

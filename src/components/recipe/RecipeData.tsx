@@ -59,37 +59,42 @@ const RecipeInner: React.FunctionComponent<RecpeInner> = ({ data, url }) => {
         <div className="scroll mt-4 flex max-w-fit space-x-3 overflow-x-auto">
           <div className="rounded-full bg-gray-100 py-2 px-2">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gray-200 text-[hsl(144,37%,49%)]">
-              {extractNumbers(data.nutritions?.calories)}g
+              {extractNumbers(data.nutritions?.calories)}
             </div>
             <dt className="pt-2 pb-4 text-center text-sm text-gray-600">Calories</dt>
           </div>
           <div className="rounded-full bg-gray-100 py-2 px-2">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gray-200 text-[hsl(144,37%,49%)]">
-              {extractNumbers(data.nutritions?.fiberContent)}g
+              {extractNumbers(data.nutritions?.fiberContent)}
+              {data.nutritions?.fiberContent && "g"}
             </div>
             <dt className="pt-2 pb-4 text-center text-sm text-gray-600">Fiber</dt>
           </div>
           <div className="rounded-full bg-gray-100 py-2 px-2">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gray-200 text-[hsl(144,37%,49%)]">
-              {extractNumbers(data.nutritions?.proteinContent)}g
+              {extractNumbers(data.nutritions?.proteinContent)}
+              {data.nutritions?.proteinContent && "g"}
             </div>
             <dt className="pt-2 pb-4 text-center text-sm text-gray-600">Protein</dt>
           </div>
           <div className="rounded-full bg-gray-100 py-2 px-2">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gray-200 text-[hsl(144,37%,49%)]">
-              {extractNumbers(data.nutritions?.carbohydrateContent)}g
+              {extractNumbers(data.nutritions?.carbohydrateContent)}
+              {data.nutritions?.carbohydrateContent && "g"}
             </div>
             <dt className="pt-2 pb-4 text-center text-sm text-gray-600">Carbs</dt>
           </div>
           <div className="rounded-full bg-gray-100 py-2 px-2">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gray-200 text-[hsl(144,37%,49%)]">
-              {extractNumbers(data.nutritions?.proteinContent)}g
+              {extractNumbers(data.nutritions?.proteinContent)}
+              {data.nutritions?.proteinContent && "g"}
             </div>
             <dt className="pt-2 pb-4 text-center text-sm text-gray-600">Fats</dt>
           </div>
           <div className="rounded-full bg-gray-100 py-2 px-2">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gray-200 text-[hsl(144,37%,49%)]">
-              {extractNumbers(data.nutritions?.sugarContent)}g
+              {extractNumbers(data.nutritions?.sugarContent)}
+              {data.nutritions?.sugarContent && "g"}
             </div>
             <dt className="pt-2 pb-4 text-center text-sm text-gray-600">Sugars</dt>
           </div>

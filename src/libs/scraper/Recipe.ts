@@ -1,21 +1,4 @@
-export type RecipeProps = {
-  name: string
-  description?: string
-  ingredients?: string[]
-  instructions: string[]
-  time: {
-    prep?: string | number
-    cook?: string | number
-    active?: string | number
-    inactive?: string | number
-    ready?: string | number
-    total?: string | number
-  }
-  nutritions?: any
-  servings?: string | number
-  author?: string
-  image?: string
-}
+import { RecipeProps } from "@/types"
 
 export function Recipe(this: RecipeProps) {
   this.name = ""
@@ -30,7 +13,14 @@ export function Recipe(this: RecipeProps) {
     ready: "" || undefined,
     total: "" || undefined
   }
-  this.nutritions = undefined
+  this.nutritions = {
+    calories: "" || undefined,
+    proteinContent: "" || undefined,
+    carbohydrateContent: "" || undefined,
+    fatContent: "" || undefined,
+    fiberContent: "" || undefined,
+    sugarContent: "" || undefined
+  }
   this.servings = "" || "1"
   this.author = "" || undefined
   this.image = "" || undefined

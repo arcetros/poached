@@ -65,7 +65,7 @@ export default function Home({ stats }: HomePageProps) {
           setIsRequested(false)
         })
     } catch (err) {
-      console.log(err)
+      console.warn(err)
     }
   }
 
