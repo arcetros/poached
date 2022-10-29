@@ -1,4 +1,3 @@
-import axios from "axios"
 import extractDomain from "extract-domain"
 
 import { allrecipes } from "./domain-scrapers"
@@ -18,16 +17,16 @@ export async function getRecipeResponse(url: string) {
   if (parse) {
     if (isDomainSupported(parse)) {
       if (domains[parse] !== undefined) {
-        return axios.get(url).then((response) => {
-          const html = response.data
+        return fetch(url).then(async (response) => {
+          const html = await response.text()
           return domains[parse](html)
         })
       } else {
         throw new Error("Site is not yet supported")
       }
     } else {
-      return axios.get(url).then((response) => {
-        const html = response.data as string
+      return fetch(url).then(async (response) => {
+        const html = await response.text()
         return getRecipeData(html)
       })
     }

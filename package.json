@@ -13,7 +13,6 @@
   "dependencies": {
     "@fontsource/inter": "^4.5.14",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
-    "axios": "^1.1.3",
     "cheerio": "^1.0.0-rc.12",
     "clsx": "^1.2.1",
     "eslint-plugin-simple-import-sort": "^8.0.0",
@@ -24,7 +23,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
-    "react-icons": "^4.6.0"
+    "react-icons": "^4.6.0",
+    "swr": "^1.3.0"
   },
   "devDependencies": {
     "@types/extract-domain": "^2.3.1",
