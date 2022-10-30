@@ -19,6 +19,19 @@
       "@/*": ["*"]
     }
   },
-  "include": ["next-env.d.ts", "types/**/*.ts", "**/*.ts", "**/*.tsx", "prisma/prisma.js"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "prisma/prisma.js",
+    "./jest-setup.ts"
+  ],
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+      "sourceMap": true
+    }
+  }
 }

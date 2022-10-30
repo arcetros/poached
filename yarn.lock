@@ -797,6 +797,11 @@
     "@testing-library/dom" "^8.5.0"
     "@types/react-dom" "^18.0.0"
 
+"@testing-library/user-event@^14.4.3":
+  version "14.4.3"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-14.4.3.tgz#af975e367743fa91989cd666666aec31a8f50591"
+  integrity sha512-kCUc5MEwaEMakkO5x7aoD+DLi02ehmEM2QCGWvNqAS1dV/fAvORWEjnjsEIvml59M7Y5kCkWN6fCCyPOe8OL6Q==
+
 "@tootallnate/once@2":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
@@ -871,7 +876,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@*":
+"@types/jest@*", "@types/jest@^29.2.0":
   version "29.2.0"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-29.2.0.tgz#fa98e08b46ab119f1a74a9552c48c589f5378a96"
   integrity sha512-KO7bPV21d65PKwv3LLsD8Jn3E05pjNjRZvkm+YTacWhVmykAb07wW6IkZUmQAltwQafNcDUEUrMO2h3jeBSisg==
@@ -956,7 +961,7 @@
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-2.0.1.tgz#20f18294f797f2209b5f65c8e3b5c8e8261d127c"
   integrity sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==
 
-"@types/testing-library__jest-dom@^5.9.1":
+"@types/testing-library__jest-dom@^5.14.5", "@types/testing-library__jest-dom@^5.9.1":
   version "5.14.5"
   resolved "https://registry.yarnpkg.com/@types/testing-library__jest-dom/-/testing-library__jest-dom-5.14.5.tgz#d113709c90b3c75fdb127ec338dad7d5f86c974f"
   integrity sha512-SBwbxYoyPIvxHbeHxTZX2Pe/74F/tX2/D3mMvzabdeJ25bBojfW0TyB8BHrbq/9zaaKICJZjLP+8r6AeZMFCuQ==
@@ -3643,6 +3648,11 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
+next-router-mock@^0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/next-router-mock/-/next-router-mock-0.7.4.tgz#6af31bdc3383d29050901bb6a71ad50eefe0fe5b"
+  integrity sha512-phYLFXOQ9klg6gxVRJJdH0QoD+5bAbAdDYM9O3YdGZ+IFEbvIoIns+o9SoSfTkCjzoU2R1ARoFc8WHp0+hnD8A==
+
 next@12.3.1:
   version "12.3.1"
   resolved "https://registry.yarnpkg.com/next/-/next-12.3.1.tgz#127b825ad2207faf869b33393ec8c75fe61e50f1"
@@ -3674,7 +3684,7 @@ node-domexception@^1.0.0:
   resolved "https://registry.yarnpkg.com/node-domexception/-/node-domexception-1.0.0.tgz#6888db46a1f71c0b76b3f7555016b63fe64766e5"
   integrity sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==
 
-node-fetch@^3.2.0:
+node-fetch@^3.2.0, node-fetch@^3.2.10:
   version "3.2.10"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-3.2.10.tgz#e8347f94b54ae18b57c9c049ef641cef398a85c8"
   integrity sha512-MhuzNwdURnZ1Cp4XTazr69K0BTizsBroX7Zx3UgDSVcZYKF/6p0CBe4EUb/hLqmzVhl0UpYfgRljQ4yxE+iCxA==

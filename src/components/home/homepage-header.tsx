@@ -9,7 +9,7 @@ type Props = {
   stats: Stats
   handleSubmitForm: (event: React.FormEvent) => Promise<void>
   setValue: (value: React.SetStateAction<string>) => void
-  value: string
+  value?: string
   isRequested: boolean
 }
 
@@ -41,7 +41,7 @@ const HomepageHeader: React.FunctionComponent<Props> = ({
             rel="noreferrer"
           >
             <AiOutlineFork className="h-5 w-5" />
-            <span className="text-sm text-[hsl(144,40%,36%)]">Fork</span>
+            Fork
           </a>
         </div>
       </div>
@@ -52,19 +52,24 @@ const HomepageHeader: React.FunctionComponent<Props> = ({
         onSubmit={handleSubmitForm}
         className="relative mx-auto mt-4 h-12 w-full rounded bg-white outline outline-1 outline-gray-200"
       >
-        <FiSearch className="absolute left-5 top-1/2 hidden h-4 w-4 -translate-y-1/2 md:block" />
+        <label htmlFor="urlKeyword" aria-label="urlKeyword">
+          <FiSearch className="absolute left-5 top-1/2 hidden h-4 w-4 -translate-y-1/2 md:block" />
+        </label>
         <input
           type="text"
           onChange={(event: React.FormEvent<HTMLInputElement>) =>
             setValue(event.currentTarget.value)
           }
-          value={value}
+          id="urlKeyword"
+          value={value || ""}
           className="h-full w-[calc(100%-75px)] rounded bg-transparent pl-4 text-sm focus:outline-none md:w-[calc(100%-120px)] md:pl-12"
           placeholder="https://example.com/creamy-courgette-potato-bake"
         />
         <button
+          type="submit"
+          id="submitUrl"
           className="absolute right-1 top-1/2 -translate-y-1/2 rounded bg-[#8df1a6cf] py-2.5 px-2.5 text-sm text-black transition duration-200 ease-out hover:bg-[#7cd492cf] disabled:cursor-not-allowed md:px-6"
-          disabled={isRequested}
+          disabled={!value || isRequested}
         >
           <span className="hidden text-[hsl(144,40%,36%)] md:block">
             {isRequested ? <LoadingDots /> : "Search"}

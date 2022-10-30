@@ -3,8 +3,8 @@ export type QueryParam = {
 }
 
 export type Stats = {
-  starGazer: number
-  origin: string
+  starGazer?: number
+  origin?: string
   forkUrl: string
 }
 
