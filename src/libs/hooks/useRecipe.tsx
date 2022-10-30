@@ -2,7 +2,7 @@ import { useRouter } from "next/router"
 import React from "react"
 
 import { QueryParam } from "@/components/home/types"
-import { Result } from "@/components/recipe/recipe"
+import { Result } from "@/components/ui/recipe/recipe"
 import { server } from "@/config"
 import { isValidHttpUrl } from "@/helpers/isValidHttp"
 

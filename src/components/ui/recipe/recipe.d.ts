@@ -1,3 +1,12 @@
+export type Nutrients = {
+  calories?: string
+  carbohydrateContent?: string
+  fatContent?: string
+  fiberContent?: string
+  proteinContent?: string
+  sugarContent?: string
+}
+
 export type Recipe = {
   author?: string
   image?: string
@@ -5,14 +14,7 @@ export type Recipe = {
   ingredients: string[]
   instructions: string[]
   name: string
-  nutritions?: {
-    calories: string
-    carbohydrateContent: string
-    fatContent: string
-    fiberContent: string
-    proteinContent: string
-    sugarContent: string
-  }
+  nutritions?: Nutrients
   servings: string | number
   time: { prep: string | number; cook: string | number; total: string | number }
 }

@@ -5,7 +5,7 @@ type Props = {
   message?: string
 }
 
-const NoResult: React.FunctionComponent<Props> = ({ message }) => {
+const RecipeUndefined: React.FunctionComponent<Props> = ({ message }) => {
   return (
     <div className="flex flex-col items-center justify-center">
       <Image width={404} height={316} src="/notfound.png" />
@@ -15,4 +15,4 @@ const NoResult: React.FunctionComponent<Props> = ({ message }) => {
   )
 }
 
-export default NoResult
+export default RecipeUndefined

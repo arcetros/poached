@@ -2,8 +2,8 @@ import type { GetStaticProps } from "next"
 import React from "react"
 
 import { HomepageHeader, HomepageInfo } from "@/components/home"
+import HomepageRecipe from "@/components/home/homepage-recipe"
 import type { HomePageProps } from "@/components/home/types"
-import RecipeData from "@/components/recipe/RecipeData"
 import { Container } from "@/components/ui"
 import { useRecipe } from "@/libs/hooks"
 
@@ -19,7 +19,7 @@ export default function Home({ stats }: HomePageProps) {
         stats={stats}
         value={value}
       />
-      <RecipeData data={recipeData} isRequested={isRequested} url={url} />
+      <HomepageRecipe data={recipeData} isRequested={isRequested} url={url} />
       <HomepageInfo />
     </Container>
   )

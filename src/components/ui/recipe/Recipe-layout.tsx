@@ -1,0 +1,117 @@
+import clsx from "clsx"
+import extractDomain from "extract-domain"
+import Image from "next/image"
+import React from "react"
+import { FiLink } from "react-icons/fi"
+
+import { Recipe } from "@/components/ui/recipe/recipe"
+
+import LayoutDuration from "./layouts/Layout-duration"
+import LayoutNutrients from "./layouts/Layout-nutrients"
+
+type RecpeInner = {
+  data: Recipe
+  url: string
+}
+
+const RecipeLayout: React.FunctionComponent<RecpeInner> = ({ data, url }) => {
+  const uniqueIngredient = Array.from(new Set(data.ingredients))
+  const extractedDomain = extractDomain(url)
+
+  return (
+    <article className="block grid-flow-row-dense grid-cols-12 gap-x-24 gap-y-16 lg:grid">
+      <div className="col-start-6 col-end-12 mt-8 mb-8 h-fit lg:mb-0">
+        <h1 className="text-3xl font-bold lg:text-6xl">{data.name}</h1>
+        <span className="mt-2 flex text-gray-500">
+          from{" "}
+          <a
+            href={url}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center font-medium hover:underline"
+          >
+            <span className="ml-1">{extractedDomain}</span>
+            <FiLink className="mx-1 h-4 w-4" />
+          </a>
+        </span>
+        <dl className="mt-8 flex items-center space-x-4">
+          <LayoutDuration label="Total" data={data.time.total} />
+          <LayoutDuration label="Cook" data={data.time.cook} />
+          <LayoutDuration label="Prep" data={data.time.prep} />
+        </dl>
+        <p className={clsx(data.description ? "block" : "hidden")}>{data.description}</p>
+      </div>
+      <section className="col-start-6 col-end-12 mb-8 h-fit lg:mb-0">
+        <h5>
+          <span className="text-red-500">*</span> Nutrition per serving
+        </h5>
+        <div className="scroll mt-4 flex max-w-fit space-x-3 overflow-x-auto">
+          <LayoutNutrients label="Calories" data={data.nutritions?.calories} />
+          <LayoutNutrients label="Fibers" data={data.nutritions?.fiberContent}>
+            {data.nutritions?.fiberContent && "g"}
+          </LayoutNutrients>
+          <LayoutNutrients label="Proteins" data={data.nutritions?.proteinContent}>
+            {data.nutritions?.proteinContent && "g"}
+          </LayoutNutrients>
+          <LayoutNutrients label="Carbs" data={data.nutritions?.carbohydrateContent}>
+            {data.nutritions?.carbohydrateContent && "g"}
+          </LayoutNutrients>
+          <LayoutNutrients label="Fats" data={data.nutritions?.fatContent}>
+            {data.nutritions?.fatContent && "g"}
+          </LayoutNutrients>
+          <LayoutNutrients label="Sugars" data={data.nutritions?.sugarContent}>
+            {data.nutritions?.fatContent && "g"}
+          </LayoutNutrients>
+        </div>
+      </section>
+      <div className="relative col-start-1 col-end-6 row-start-1 row-end-auto mx-[calc(1.5rem*-0.7)] mt-8 lg:mx-0">
+        <div className="left-0 top-0 w-full pt-[125%] lg:absolute">
+          <picture className="absolute left-0 top-0 h-full w-full">
+            {data?.image && <Image src={data.image} layout="fill" objectFit="cover" />}
+          </picture>
+        </div>
+      </div>
+
+      <div className="col-start-1 col-end-6 row-start-1 row-end-7 mt-12 lg:mt-8">
+        <section className="flex flex-col lg:sticky lg:top-14 lg:left-0 lg:mt-[calc(125%+3rem)] lg:h-[calc(100vh-11rem)]">
+          <header className="flex items-center justify-between">
+            <div>
+              <h5 className="text-2xl font-bold lg:text-3xl">Ingredients</h5>
+              <h4 className="mt-1 text-gray-500">for {data.servings} servings</h4>
+            </div>
+            <span className="text-xl font-bold">({data.ingredients.length})</span>
+          </header>
+          <ul className="scroll mt-8 grow divide-y overflow-auto lg:mt-4">
+            {uniqueIngredient.map((item: string) => {
+              return (
+                <li className="flex py-4 first:pt-2" key={item}>
+                  <label className="flex items-center">{item}</label>
+                </li>
+              )
+            })}
+          </ul>
+        </section>
+      </div>
+      <div className="col-start-6 col-end-12 mt-12 lg:mt-0">
+        <div className="flex items-center justify-between">
+          <h5 className="text-2xl font-bold lg:text-3xl">Instructions</h5>
+          <span className="text-xl font-bold">({data.instructions.length})</span>
+        </div>
+        <ol className="mt-8 lg:mt-4">
+          {data.instructions.map((item: string, id: number) => {
+            return (
+              <li className="flex py-4 first:pt-2" key={item}>
+                <div className="flex h-12 w-12 shrink-0 grow-0 basis-12 items-center justify-center rounded-full border-2 border-black">
+                  <span>{id + 1}</span>
+                </div>
+                <p className="ml-4">{item}</p>
+              </li>
+            )
+          })}
+        </ol>
+      </div>
+    </article>
+  )
+}
+
+export default RecipeLayout
