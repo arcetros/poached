@@ -1,7 +1,6 @@
 import "@testing-library/jest-dom"
 
-import { render, screen } from "@testing-library/react"
-import { fireEvent } from "@testing-library/react"
+import { cleanup, fireEvent, render, screen } from "@testing-library/react"
 import React from "react"
 
 import { HomepageHeader } from "../index"
@@ -21,6 +20,8 @@ const props: Props = {
   value: "https://stryve.life/recipes/creamy-courgette-potato-bake",
   stats: stats
 }
+
+afterEach(cleanup)
 
 describe("homepage header", () => {
   const handleSubmit = jest.fn() as jest.Mock

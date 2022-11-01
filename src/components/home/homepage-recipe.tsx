@@ -8,7 +8,7 @@ const HomepageRecipe: React.FunctionComponent<RecipeData> = ({ data, url, isRequ
   return (
     <>
       {isRequested && <RecipeLayoutSkeleton />}
-      {!isRequested && data?.results && <RecipeLayout data={data.results} url={url} />}
+      {!isRequested && url && data?.results && <RecipeLayout data={data.results} url={url} />}
       {!isRequested && url && !data?.results && <RecipeUndefined message={data?.message} />}
     </>
   )

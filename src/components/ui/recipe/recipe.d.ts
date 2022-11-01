@@ -28,6 +28,6 @@ export type Result = {
 
 export type RecipeData = {
   data?: Result
-  url: string
+  url?: string
   isRequested?: boolean
 }

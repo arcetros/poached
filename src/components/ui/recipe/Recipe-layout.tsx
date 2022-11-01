@@ -19,7 +19,10 @@ const RecipeLayout: React.FunctionComponent<RecpeInner> = ({ data, url }) => {
   const extractedDomain = extractDomain(url)
 
   return (
-    <article className="block grid-flow-row-dense grid-cols-12 gap-x-24 gap-y-16 lg:grid">
+    <article
+      aria-label="recipe-data"
+      className="block grid-flow-row-dense grid-cols-12 gap-x-24 gap-y-16 lg:grid"
+    >
       <div className="col-start-6 col-end-12 mt-8 mb-8 h-fit lg:mb-0">
         <h1 className="text-3xl font-bold lg:text-6xl">{data.name}</h1>
         <span className="mt-2 flex text-gray-500">
@@ -71,17 +74,21 @@ const RecipeLayout: React.FunctionComponent<RecpeInner> = ({ data, url }) => {
           </picture>
         </div>
       </div>
-
       <div className="col-start-1 col-end-6 row-start-1 row-end-7 mt-12 lg:mt-8">
         <section className="flex flex-col lg:sticky lg:top-14 lg:left-0 lg:mt-[calc(125%+3rem)] lg:h-[calc(100vh-11rem)]">
           <header className="flex items-center justify-between">
             <div>
-              <h5 className="text-2xl font-bold lg:text-3xl">Ingredients</h5>
+              <h5 id="ingredients-heading" className="text-2xl font-bold lg:text-3xl">
+                Ingredients
+              </h5>
               <h4 className="mt-1 text-gray-500">for {data.servings} servings</h4>
             </div>
             <span className="text-xl font-bold">({data.ingredients.length})</span>
           </header>
-          <ul className="scroll mt-8 grow divide-y overflow-auto lg:mt-4">
+          <ul
+            aria-labelledby="ingredients-heading"
+            className="scroll mt-8 grow divide-y overflow-auto lg:mt-4"
+          >
             {uniqueIngredient.map((item: string) => {
               return (
                 <li className="flex py-4 first:pt-2" key={item}>
@@ -94,10 +101,12 @@ const RecipeLayout: React.FunctionComponent<RecpeInner> = ({ data, url }) => {
       </div>
       <div className="col-start-6 col-end-12 mt-12 lg:mt-0">
         <div className="flex items-center justify-between">
-          <h5 className="text-2xl font-bold lg:text-3xl">Instructions</h5>
+          <h5 id="instructions-heading" className="text-2xl font-bold lg:text-3xl">
+            Instructions
+          </h5>
           <span className="text-xl font-bold">({data.instructions.length})</span>
         </div>
-        <ol className="mt-8 lg:mt-4">
+        <ol aria-labelledby="instructions-heading" className="mt-8 lg:mt-4">
           {data.instructions.map((item: string, id: number) => {
             return (
               <li className="flex py-4 first:pt-2" key={item}>

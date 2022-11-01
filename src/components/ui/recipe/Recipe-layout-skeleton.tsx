@@ -2,7 +2,10 @@ import React from "react"
 
 const RecipeLayoutSkeleton: React.FunctionComponent = () => {
   return (
-    <article className="block grid-flow-row-dense grid-cols-12 gap-x-24 gap-y-16 lg:grid">
+    <article
+      className="block grid-flow-row-dense grid-cols-12 gap-x-24 gap-y-16 lg:grid"
+      aria-label="recipe-skeleton"
+    >
       <div className="col-start-6 col-end-12 mt-8 mb-8 h-fit lg:mb-0">
         <div className="h-8 w-1/2 animate-pulse rounded-lg bg-gray-300"></div>
         <div className="mt-3 h-4 w-24 animate-pulse rounded-lg bg-gray-500"></div>
