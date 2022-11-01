@@ -15,7 +15,6 @@ const RecipeLayoutSkeleton: React.FunctionComponent = () => {
           <picture className="absolute left-0 top-0 h-full w-full animate-pulse rounded-lg bg-gray-300"></picture>
         </div>
       </div>
-
       <div className="col-start-1 col-end-6 row-start-1 row-end-7 mt-12 lg:mt-8">
         <section className="flex flex-col lg:sticky lg:top-14 lg:left-0 lg:mt-[calc(125%+3rem)] lg:h-[calc(100vh-11rem)]">
           <header className="flex items-center justify-between">
