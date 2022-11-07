@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
-    "test": "jest",
+    "test": "jest --verbose=true",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -17,6 +17,7 @@
     "@testing-library/user-event": "^14.4.3",
     "cheerio": "^1.0.0-rc.12",
     "clsx": "^1.2.1",
+    "cross-fetch": "^3.1.5",
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "extract-domain": "^2.4.8",
     "jsonschema": "^1.4.1",

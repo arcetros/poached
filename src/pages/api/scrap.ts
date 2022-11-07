@@ -23,6 +23,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       err.response?.status > 400
         ? "Site not yet supported or forbidden to access this domain"
         : err.message
+    console.log(err)
     response.status(400).send({ method: request.method, status: false, message: error })
   }
 }

@@ -4,6 +4,7 @@ import { RecipeProps } from "@/types"
 
 import { Recipe } from "../Recipe"
 import { getDescriptionFromSelector, getImageFromSelector } from "../selectors"
+import validateRecipe from "../validateRecipe"
 
 export default function allrecipes(html: string) {
   const $ = cheerio.load(html)
@@ -51,5 +52,5 @@ export default function allrecipes(html: string) {
     .prev()
     .text()
 
-  return recipe
+  return validateRecipe(recipe)
 }
