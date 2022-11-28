@@ -21,7 +21,7 @@
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "extract-domain": "^2.4.8",
     "jsonschema": "^1.4.1",
-    "next": "12.3.1",
+    "next": "13.0.5",
     "next-router-mock": "^0.7.4",
     "node-fetch": "^3.2.10",
     "parse-domain": "^7.0.1",
