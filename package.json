@@ -28,7 +28,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
-    "react-icons": "^4.6.0"
+    "react-icons": "^4.6.0",
+    "scrape-recipe-schema": "^0.1.4"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",

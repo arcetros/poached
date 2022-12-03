@@ -1,4 +1,5 @@
 import extractDomain from "extract-domain"
+import getRecipeTest from "scrape-recipe-schema"
 
 import { allrecipes } from "./domain-scrapers"
 import getRecipeData from "./getRecipeData"
@@ -27,6 +28,7 @@ export async function getRecipeResponse(url: string) {
     } else {
       return fetch(url).then(async (response) => {
         const html = await response.text()
+        getRecipeTest({ html: html }).then((data) => console.log(data))
         return getRecipeData(html)
       })
     }

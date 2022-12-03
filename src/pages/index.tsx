@@ -1,6 +1,7 @@
 import type { GetStaticProps } from "next"
 import { useRouter } from "next/router"
 import React from "react"
+import getRecipeData from "scrape-recipe-schema"
 
 import { HomepageHeader, HomepageInfo } from "@/components/home"
 import HomepageRecipe from "@/components/home/homepage-recipe"
@@ -54,6 +55,10 @@ export default function Home({ stats }: HomePageProps) {
 
   React.useEffect(() => {
     if (url) {
+      // const test = async () => {
+      //   getRecipeData(url).then(({ data }) => console.log(data))
+      // }
+      // test()
       fetchRecipe(url)
     }
   }, [url])
