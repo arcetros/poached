@@ -4,18 +4,18 @@ import Image from "next/image"
 import React from "react"
 import { FiLink } from "react-icons/fi"
 
-import { Recipe } from "@/components/ui/recipe/recipe"
+import { RootSchema } from "@/types"
 
 import LayoutDuration from "./layouts/Layout-duration"
-import LayoutNutrients from "./layouts/Layout-nutrients"
+// import LayoutNutrients from "./layouts/Layout-nutrients"
 
-type RecpeInner = {
-  data: Recipe
+type RecipeInner = {
+  data: RootSchema
   url: string
 }
 
-const RecipeLayout: React.FunctionComponent<RecpeInner> = ({ data, url }) => {
-  const uniqueIngredient = Array.from(new Set(data.ingredients))
+const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data, url }) => {
+  const uniqueIngredient = Array.from(new Set(data.recipeIngredients))
   const extractedDomain = extractDomain(url)
 
   return (
@@ -38,18 +38,18 @@ const RecipeLayout: React.FunctionComponent<RecpeInner> = ({ data, url }) => {
           </a>
         </span>
         <dl className="mt-8 flex items-center space-x-4">
-          <LayoutDuration label="Total" data={data.time.total} />
-          <LayoutDuration label="Cook" data={data.time.cook} />
-          <LayoutDuration label="Prep" data={data.time.prep} />
+          <LayoutDuration label="Total" data={data.totalTime} />
+          <LayoutDuration label="Cook" data={data.cookTime} />
+          <LayoutDuration label="Prep" data={data.prepTime} />
         </dl>
         <p className={clsx(data.description ? "block" : "hidden")}>{data.description}</p>
       </div>
-      <section className="col-start-6 col-end-12 mb-8 h-fit lg:mb-0">
+      {/* <section className="col-start-6 col-end-12 mb-8 h-fit lg:mb-0">
         <h5>
           <span className="text-red-500">*</span> Nutrition per serving
         </h5>
         <div className="scroll mt-4 flex max-w-fit space-x-3 overflow-x-auto">
-          <LayoutNutrients label="Calories" data={data.nutritions?.calories} />
+          <LayoutNutrients label="Calories" data={data.} />
           <LayoutNutrients label="Fibers" data={data.nutritions?.fiberContent}>
             {data.nutritions?.fiberContent && "g"}
           </LayoutNutrients>
@@ -66,7 +66,7 @@ const RecipeLayout: React.FunctionComponent<RecpeInner> = ({ data, url }) => {
             {data.nutritions?.fatContent && "g"}
           </LayoutNutrients>
         </div>
-      </section>
+      </section> */}
       <div className="relative col-start-1 col-end-6 row-start-1 row-end-auto mx-[calc(1.5rem*-0.7)] mt-8 lg:mx-0">
         <div className="left-0 top-0 w-full pt-[125%] lg:absolute">
           <picture className="absolute left-0 top-0 h-full w-full">
@@ -81,9 +81,9 @@ const RecipeLayout: React.FunctionComponent<RecpeInner> = ({ data, url }) => {
               <h5 id="ingredients-heading" className="text-2xl font-bold lg:text-3xl">
                 Ingredients
               </h5>
-              <h4 className="mt-1 text-gray-500">for {data.servings} servings</h4>
+              <h4 className="mt-1 text-gray-500">for {data.recipeYield} servings</h4>
             </div>
-            <span className="text-xl font-bold">({data.ingredients.length})</span>
+            <span className="text-xl font-bold">({data.recipeIngredients.length})</span>
           </header>
           <ul
             aria-labelledby="ingredients-heading"
@@ -104,19 +104,22 @@ const RecipeLayout: React.FunctionComponent<RecpeInner> = ({ data, url }) => {
           <h5 id="instructions-heading" className="text-2xl font-bold lg:text-3xl">
             Instructions
           </h5>
-          <span className="text-xl font-bold">({data.instructions.length})</span>
+          <span className="text-xl font-bold">
+            ({data.recipeInstructions && data.recipeInstructions.length})
+          </span>
         </div>
         <ol aria-labelledby="instructions-heading" className="mt-8 lg:mt-4">
-          {data.instructions.map((item: string, id: number) => {
-            return (
-              <li className="flex py-4 first:pt-2" key={item}>
-                <div className="flex h-12 w-12 shrink-0 grow-0 basis-12 items-center justify-center rounded-full border-2 border-black">
-                  <span>{id + 1}</span>
-                </div>
-                <p className="ml-4">{item}</p>
-              </li>
-            )
-          })}
+          {data.recipeInstructions &&
+            data.recipeInstructions.map((item: string, id: number) => {
+              return (
+                <li className="flex py-4 first:pt-2" key={item}>
+                  <div className="flex h-12 w-12 shrink-0 grow-0 basis-12 items-center justify-center rounded-full border-2 border-black">
+                    <span>{id + 1}</span>
+                  </div>
+                  <p className="ml-4">{item}</p>
+                </li>
+              )
+            })}
         </ol>
       </div>
     </article>

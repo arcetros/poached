@@ -1,25 +1,21 @@
-export type RecipeProps = {
+export type RootSchema = {
+  url: string
   name: string
-  description?: string
-  ingredients?: string[]
-  instructions: string[]
-  time: {
-    prep?: string | number
-    cook?: string | number
-    active?: string | number
-    inactive?: string | number
-    ready?: string | number
-    total?: string | number
-  }
-  nutritions: {
-    calories?: string
-    proteinContent?: string
-    carbohydrateContent?: string
-    fatContent?: string
-    fiberContent?: string
-    sugarContent?: string
-  }
-  servings?: string | number
-  author?: string
   image?: string
+  description?: string
+  cookTime?: string
+  prepTime?: string
+  totalTime?: string
+  cookTimeOriginalFormat?: string
+  prepTimeOriginalFormat?: string
+  totalTimeOriginalFormat?: string
+  prepTime?: string
+  totalTime?: string
+  recipeYield?: number | string
+  recipeIngredients: string[]
+  recipeInstructions?: string[]
+  recipeCategories?: string[]
+  recipeCuisines?: string[]
+  recipeTypes?: string[]
+  keywords?: string[]
 }

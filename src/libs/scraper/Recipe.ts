@@ -1,27 +1,19 @@
-import { RecipeProps } from "@/types"
+import { RootSchema } from "@/types"
 
-export function Recipe(this: RecipeProps) {
+export function Recipe(this: RootSchema) {
   this.name = ""
-  this.description = "" || undefined
-  this.ingredients = []
-  this.instructions = []
-  this.time = {
-    prep: "" || undefined,
-    cook: "" || undefined,
-    active: "" || undefined,
-    inactive: "" || undefined,
-    ready: "" || undefined,
-    total: "" || undefined
-  }
-  this.nutritions = {
-    calories: "" || undefined,
-    proteinContent: "" || undefined,
-    carbohydrateContent: "" || undefined,
-    fatContent: "" || undefined,
-    fiberContent: "" || undefined,
-    sugarContent: "" || undefined
-  }
-  this.servings = "" || "1"
-  this.author = "" || undefined
-  this.image = "" || undefined
+  this.image = ""
+  this.description = ""
+  this.recipeIngredients = []
+  this.recipeInstructions = []
+  this.cookTime = ""
+  this.prepTime = ""
+  this.totalTime = ""
+  this.cookTimeOriginalFormat = ""
+  this.prepTimeOriginalFormat = ""
+  this.totalTimeOriginalFormat = ""
+  this.recipeYield = undefined
+  this.recipeCategories = []
+  this.recipeCuisines = []
+  this.recipeTypes = []
 }

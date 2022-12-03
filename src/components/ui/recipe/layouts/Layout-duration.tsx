@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import React from "react"
 
-const LayoutDuration: React.FunctionComponent<{ label: string; data: string | number }> = ({
+const LayoutDuration: React.FunctionComponent<{ label: string; data?: string | number }> = ({
   label,
   data
 }) => {
