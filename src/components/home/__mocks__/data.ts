@@ -1,13 +1,12 @@
-import type { Result } from "@/components/ui/recipe/recipe"
+import { Result } from "@/components/ui/recipe/recipe"
 
 export const data: Result = {
   message: "success",
   method: "POST",
   results: {
-    author: "Rob",
     image:
       "https://images.prismic.io/stryve/9ae78bc2-ad5e-449c-8626-8c9faa37054c_creamy-courgette-potato-bake.png?auto=compress,format",
-    ingredients: [
+    recipeIngredients: [
       "1000g Potato",
       "2 Courgette",
       "2 Brown onion",
@@ -21,7 +20,7 @@ export const data: Result = {
       "2tsp Smoked paprika",
       "2tsp Smoked paprika"
     ],
-    instructions: [
+    recipeInstructions: [
       "Add cashew nuts to a bowl with enough hot water to cover",
       "Peel and thinly slice the potatoes and courgettes",
       "Thinly slice the onion and add to a pan with olive oil fry for ~5 mins mixing often until lightly brown",
@@ -33,16 +32,10 @@ export const data: Result = {
       "Finish off with one more layer of potatoes, the remaining sauce and the other half of the smoked paprika – place in the oven for 45 mins"
     ],
     name: "Creamy courgette & potato bake",
-    nutritions: {
-      calories: "572 calories",
-      carbohydrateContent: "24.9g",
-      fatContent: "73.2g",
-      fiberContent: "20.4g",
-      proteinContent: "13.8g",
-      sugarContent: "10g"
-    },
-    servings: "4",
-    time: { prep: "25 minutes", cook: "45 minutes", total: "70 minutes" }
+    recipeYield: "4",
+    prepTime: "25 Minutes",
+    cookTime: "45 Minutes",
+    totalTime: "70 Minutes"
   },
   status: true
 }

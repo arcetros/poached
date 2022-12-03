@@ -52,7 +52,5 @@ export default function allrecipes(html: string) {
   //   .prev()
   //   .text()
 
-  console.log(recipe)
-
   return validateRecipe(recipe)
 }
