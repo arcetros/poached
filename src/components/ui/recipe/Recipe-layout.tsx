@@ -70,7 +70,16 @@ const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data, url }) => {
       <div className="relative col-start-1 col-end-6 row-start-1 row-end-auto mx-[calc(1.5rem*-0.7)] mt-8 lg:mx-0">
         <div className="left-0 top-0 w-full pt-[125%] lg:absolute">
           <picture className="absolute left-0 top-0 h-full w-full">
-            {data?.image && <Image src={data.image} layout="fill" objectFit="cover" />}
+            {data?.image && (
+              <Image
+                alt={data.name}
+                src={data.image}
+                className="object-cover"
+                fill
+                sizes="1"
+                priority
+              />
+            )}
           </picture>
         </div>
       </div>
