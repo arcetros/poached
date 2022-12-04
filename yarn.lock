@@ -998,7 +998,6 @@
     regexpp "^3.2.0"
     semver "^7.3.7"
     tsutils "^3.21.0"
-
 "@typescript-eslint/parser@^5.40.1", "@typescript-eslint/parser@^5.42.0":
   version "5.45.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-5.45.0.tgz#b18a5f6b3cf1c2b3e399e9d2df4be40d6b0ddd0e"
