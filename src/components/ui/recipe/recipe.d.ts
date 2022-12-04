@@ -1,11 +1,13 @@
-export type Nutrients = {
-  calories?: string
-  carbohydrateContent?: string
-  fatContent?: string
-  fiberContent?: string
-  proteinContent?: string
-  sugarContent?: string
-}
+import { RootSchema } from "@/types"
+
+// export type Nutrients = {
+//   calories?: string
+//   carbohydrateContent?: string
+//   fatContent?: string
+//   fiberContent?: string
+//   proteinContent?: string
+//   sugarContent?: string
+// }
 
 export type Recipe = {
   author?: string
@@ -22,7 +24,7 @@ export type Recipe = {
 export type Result = {
   message: string
   status: boolean
-  results: Recipe
+  results: RootSchema
   method: string
 }
 

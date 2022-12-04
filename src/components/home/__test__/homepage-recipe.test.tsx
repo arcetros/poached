@@ -42,8 +42,8 @@ describe("homepage recipe", () => {
 
     expect(getByRole("article", { name: /recipe-data/i })).toBeVisible()
     expect(getByText(data.results.name)).toBeInTheDocument()
-    expect(ingredients.length).toBe(Array.from(new Set(data.results.ingredients)).length)
-    expect(instructions.length).toBe(data.results.instructions.length)
+    expect(ingredients.length).toBe(Array.from(new Set(data.results.recipeIngredients)).length)
+    expect(instructions.length).toBe(data.results.recipeInstructions?.length)
   })
 
   it("should render undefined component when data is undefined", () => {

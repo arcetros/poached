@@ -1,19 +1,16 @@
+# Poached
+
 <p align="center">
-    <img align=center src="https://res.cloudinary.com/poggies/image/upload/v1666958899/j2jiuewb4fpcfzm3nea0.png" alt="Poached" width="100" /></br>
-</p>
-<p align="center">
-    <strong>Poached</strong>
-    <br/>
-    <i>Too much to read, pick out just the ingredients and instructions!</i>
+    <img align=center src="https://repository-images.githubusercontent.com/552452933/354f1931-3717-4e8a-8175-56af9c5bbcb1" alt="Poached" /></br>
 </p>
 
-# Overview
-Poached is a website that serves the users only the essential bits of a lots of annoying clutters that has nothing to do with the food itself.
+[![License](https://img.shields.io/github/license/arcetros/poached)](https://github.com/arcetros/poached/blob/main/LICENSE)
+![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=poached.vercel.app)
 
-Check out the live site [here](https://poached.vercel.app/).
+> Source code for [poached.vercel.app](https://poached.vercel.app).
 
 ## Getting started
-```
+```bash
 # Clone this repository
 
 $ git clone https://github.com/arcetros/poached
@@ -38,7 +35,9 @@ I will give it my best to keep this project up to date and with your help this g
 Thank you 😎
 
 ## Acknowledgements
-- Beautiful [stryve.life](https://stryve.life/) recipe article layout by Rob Simpson. Check out his shots [here](https://dribbble.com/robsimpson). 
+- Beautiful [stryve.life](https://stryve.life/) recipe article layout by Rob Simpson. Check out his shots [here](https://dribbble.com/robsimpson).
+- Built with [Next.js](https://nextjs.org/).
+ 
 ##  License
 
 Distributed under the MIT License. See [LICENSE](https://github.com/arcetros/poached/blob/main/LICENSE) for more information.
