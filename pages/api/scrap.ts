@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next"
 
-import { getRecipeResponse } from "@/libs/scraper/getRecipeResponse"
+import { scrapeRecipe } from "@/libs/scraper/scrape-recipe"
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   const { body } = request
@@ -11,7 +11,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
   }
 
   try {
-    const recipe = await getRecipeResponse(body)
+    const recipe = await scrapeRecipe(body)
     response.status(200).send({
       method: request.method,
       status: true,

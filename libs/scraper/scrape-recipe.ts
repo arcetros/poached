@@ -1,7 +1,7 @@
 import extractDomain from "extract-domain"
-import getRecipeTest from "scrape-recipe-schema"
+import getRecipeData from "scrape-recipe-schema"
 
-import { allrecipes } from "./domain-scrapers"
+import { allrecipes } from "./alternative-scrapers"
 
 interface Domains {
   [key: string]: (any: string) => any
@@ -15,7 +15,7 @@ function isDomainSupported(domain: string) {
   return Object.keys(domains).find((d) => d === domain) !== undefined
 }
 
-export async function getRecipeResponse(url: string) {
+export async function scrapeRecipe(url: string) {
   const parse = extractDomain(url)
 
   if (parse) {
@@ -25,17 +25,14 @@ export async function getRecipeResponse(url: string) {
           const html = await response.text()
           return domains[parse](html)
         })
-      } else {
-        throw new Error("Site is not yet supported")
       }
+      throw new Error("Site is not yet supported")
     } else {
-      const recipe = await getRecipeTest({ html: await (await fetch(url)).text() })
-
+      const recipe = await getRecipeData({ html: await (await fetch(url)).text() })
       if (recipe.data !== undefined) {
         return recipe.data
-      } else {
-        throw new Error(recipe.message)
       }
+      throw new Error(recipe.message)
     }
   } else {
     throw new Error("Failed to parse domain")

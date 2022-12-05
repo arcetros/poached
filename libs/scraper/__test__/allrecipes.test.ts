@@ -1,7 +1,7 @@
 import "cross-fetch/polyfill"
 
 import { allrecipes } from "../__mocks__/allrecipes"
-import { allrecipes as generate } from "../domain-scrapers"
+import { allrecipes as generate } from "../alternative-scrapers"
 
 describe("allrecipes", () => {
   it("should fetch the expected recipe (allrecipes)", async () => {
