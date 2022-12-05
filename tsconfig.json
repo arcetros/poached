@@ -14,19 +14,12 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
       "@/*": ["*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "types/**/*.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "prisma/prisma.js",
-    "./jest-setup.ts"
-  ],
+  "include": ["next-env.d.ts", "types/**/*.ts", "**/*.ts", "**/*.tsx", "./jest-setup.ts"],
   "exclude": ["node_modules"],
   "ts-node": {
     "compilerOptions": {
