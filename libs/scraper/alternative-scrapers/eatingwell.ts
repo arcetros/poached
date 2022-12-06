@@ -14,6 +14,9 @@ export default function eatingWell(html: string) {
   const $ = cheerio.load(html)
   const recipe: RootSchema = new (Recipe as any)()
 
+  const recipeInfoSection =
+    ".recipe-info-section > .recipe-meta-container > div > .recipe-meta-item"
+
   recipe.name = getTitleFromSelector(html) as string
   recipe.description = getDescriptionFromSelector(html)
   recipe.image = getImageFromSelector(html)
@@ -27,6 +30,16 @@ export default function eatingWell(html: string) {
     const directions = $(el).text().replace(/\s\s+/g, " ").trim()
     recipe.recipeInstructions?.push(directions)
   })
+
+  $(".recipe-info-section > .nutrition-profile > ul > li > a").each((_, el) => {
+    const categories = $(el).text().replace(/\s\s+/g, " ").trim()
+    recipe.recipeCategories?.push(categories)
+  })
+
+  recipe.totalTime = $(`${recipeInfoSection} div:contains("total:")`).next().text()
+  recipe.recipeYield = $(`${recipeInfoSection} div:contains("Servings:")`).next().text()
+
+  console.log(recipe)
 
   return validateRecipe(recipe)
 }
