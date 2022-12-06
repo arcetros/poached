@@ -36,10 +36,16 @@ export default function eatingWell(html: string) {
     recipe.recipeCategories?.push(categories)
   })
 
-  recipe.totalTime = $(`${recipeInfoSection} div:contains("total:")`).next().text()
-  recipe.recipeYield = $(`${recipeInfoSection} div:contains("Servings:")`).next().text()
-
-  console.log(recipe)
+  recipe.totalTime = $(`${recipeInfoSection} div:contains("total:")`)
+    .next()
+    .text()
+    .replace(/\s\s+/g, " ")
+    .trim()
+  recipe.recipeYield = $(`${recipeInfoSection} div:contains("Servings:")`)
+    .next()
+    .text()
+    .replace(/\s\s+/g, " ")
+    .trim()
 
   return validateRecipe(recipe)
 }
