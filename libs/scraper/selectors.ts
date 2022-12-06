@@ -1,5 +1,11 @@
 import * as cheerio from "cheerio"
 
+export function getTitleFromSelector(html:string) {
+  const $ = cheerio.load(html)
+  const title = $("meta[property='og:title']").attr("content") || $("meta[name='twitter:title']").attr()
+  return title
+}
+
 export function getDescriptionFromSelector(html: string) {
   const $ = cheerio.load(html)
   const description =

@@ -1,14 +1,15 @@
 import extractDomain from "extract-domain"
 import getRecipeData from "scrape-recipe-schema"
 
-import { allrecipes } from "./alternative-scrapers"
+import { allrecipes, eatingwell } from "./alternative-scrapers"
 
 interface Domains {
   [key: string]: (any: string) => any
 }
 
 const domains: Domains = {
-  "allrecipes.com": allrecipes
+  "allrecipes.com": allrecipes,
+  "eatingwell.com": eatingwell
 }
 
 function isDomainSupported(domain: string) {
