@@ -60,7 +60,7 @@ export default function Home({ stats }: HomePageProps) {
 
   return (
     <Container className="m-auto flex flex-col gap-y-8 divide-y">
-      <HomepageHeader
+      {/* <HomepageHeader
         handleSubmitForm={handleSubmitForm}
         isRequested={isRequested}
         setValue={setValue}
@@ -68,7 +68,7 @@ export default function Home({ stats }: HomePageProps) {
         value={value}
       />
       <HomepageRecipe data={recipeData} isRequested={isRequested} url={url} />
-      <HomepageInfo />
+      <HomepageInfo /> */}
     </Container>
   )
 }

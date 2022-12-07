@@ -12,8 +12,9 @@ module.exports = {
     },
     extend: {
       colors: {
-        "dark-1": "#1b1f24",
-        "dark-2": "#2a2f39"
+        "dark-1": "#202123",
+        "dark-2": "#171819",
+        "dark-neutral": "#2a2b2d"
       },
       fontFamily: {
         primary: ["TT Norms Pro", "ui-sans-serif", "system-ui"],

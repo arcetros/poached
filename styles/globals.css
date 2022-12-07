@@ -67,7 +67,7 @@
 
 @layer base {
   body {
-    @apply m-0 bg-[#fcfeff] p-0 font-primary text-sm text-gray-900 antialiased md:text-base;
+    @apply m-0 bg-dark-2 p-0 font-primary text-sm text-[#e8e8e9] antialiased md:text-base;
   }
 
   .scroll::-webkit-scrollbar {
@@ -88,4 +88,11 @@
     background-color: #171717;
     border: 0.9375rem solid #fcfeff;
   }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  color-scheme: dark;
 }
