@@ -16,7 +16,8 @@ module.exports = {
         "dark-2": "#2a2f39"
       },
       fontFamily: {
-        primary: ["Inter", "ui-sans-serif", "system-ui"]
+        primary: ["TT Norms Pro", "ui-sans-serif", "system-ui"],
+        headline: ["Gilroy", "ui-sans-serif", "system-ui"]
       },
       animation: {
         text: "text 5s ease infinite"

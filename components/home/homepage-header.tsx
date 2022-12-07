@@ -23,7 +23,7 @@ const HomepageHeader: React.FunctionComponent<Props> = ({
   return (
     <header>
       <div className="flex flex-col items-start justify-between lg:flex-row   lg:items-center">
-        <h1 className="text-2xl font-bold md:text-4xl">poached</h1>
+        <h1 className="font-headline text-2xl font-bold md:text-4xl">Poached</h1>
         <div className="mt-1 flex space-x-3 lg:mt-0 lg:ml-3">
           <a
             href={stats.origin}

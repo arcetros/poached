@@ -2,6 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "TT Norms Pro";
+  font-style: normal;
+  font-weight: 100;
+  src: url(/fonts/TTThin.otf);
+}
+
+@font-face {
+  font-family: "TT Norms Pro";
+  font-style: normal;
+  font-weight: 300;
+  src: url(/fonts/TTLight.otf);
+}
+
+@font-face {
+  font-family: "TT Norms Pro";
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/TTRegular.otf);
+}
+
+@font-face {
+  font-family: "TT Norms Pro";
+  font-style: normal;
+  font-weight: 500;
+  src: url(/fonts/TTMedium.otf);
+}
+
+@font-face {
+  font-family: "TT Norms Pro";
+  font-style: normal;
+  font-weight: 700;
+  src: url(/fonts/TTBold.otf);
+}
+
+@font-face {
+  font-family: "TT Norms Pro";
+  font-style: normal;
+  font-weight: 900;
+  src: url(/fonts/TTBlack.otf);
+}
+
+@font-face {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/Gilroy-Regular.otf);
+}
+
+@font-face {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 500;
+  src: url(/fonts/Gilroy-Medium.otf);
+}
+
+@font-face {
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 700;
+  src: url(/fonts/Gilroy-Bold.otf);
+}
+
 @layer base {
   body {
     @apply m-0 bg-[#fcfeff] p-0 font-primary text-sm text-gray-900 antialiased md:text-base;

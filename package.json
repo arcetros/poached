@@ -12,7 +12,6 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@fontsource/inter": "^4.5.14",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@testing-library/user-event": "^14.4.3",
     "cheerio": "^1.0.0-rc.12",
