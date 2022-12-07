@@ -85,8 +85,8 @@
   }
 
   .scroll::-webkit-scrollbar-thumb {
-    background-color: #171717;
-    border: 0.9375rem solid #fcfeff;
+    background-color: #e8e8e9;
+    border: 0.9375rem solid #171717;
   }
 }
 

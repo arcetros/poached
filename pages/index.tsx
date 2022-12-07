@@ -1,6 +1,7 @@
 import type { GetStaticProps } from "next"
 import { useRouter } from "next/router"
 import React from "react"
+import { FiPlus, FiShare2 } from "react-icons/fi"
 
 import { HomepageHeader, HomepageInfo } from "@/components/home"
 import HomepageRecipe from "@/components/home/homepage-recipe"
@@ -59,17 +60,34 @@ export default function Home({ stats }: HomePageProps) {
   }, [url])
 
   return (
-    <Container className="m-auto flex flex-col gap-y-8 divide-y">
-      <HomepageHeader
-        handleSubmitForm={handleSubmitForm}
-        isRequested={isRequested}
-        setValue={setValue}
-        stats={stats}
-        value={value}
-      />
-      <HomepageRecipe data={recipeData} isRequested={isRequested} url={url} />
+    <main className="flex h-full flex-col justify-between">
+      <section>
+        <div className="z-40 flex h-20 w-full items-center justify-between bg-dark-1 px-8">
+          <HomepageHeader
+            handleSubmitForm={handleSubmitForm}
+            isRequested={isRequested}
+            setValue={setValue}
+            stats={stats}
+            value={value}
+          />
+          <div className="flex space-x-4">
+            <button className="flex h-12 items-center space-x-2 rounded-lg px-6 outline outline-1 outline-dark-neutral">
+              <FiShare2 className="h-4 w-4" />
+              <span className="text-sm">Share</span>
+            </button>
+            <button className="flex h-12 items-center space-x-2 rounded-lg bg-[hsl(144,40%,36%)] px-6">
+              <FiPlus className="h-5 w-5" />
+              <span className="text-sm">Add Recipe</span>
+            </button>
+          </div>
+        </div>
+        <Container className="m-auto flex flex-col gap-y-8 overflow-hidden">
+          <HomepageRecipe data={recipeData} isRequested={isRequested} url={url} />
+        </Container>
+      </section>
+
       <HomepageInfo />
-    </Container>
+    </main>
   )
 }
 

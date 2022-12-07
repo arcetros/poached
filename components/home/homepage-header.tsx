@@ -1,6 +1,5 @@
 import React from "react"
-import { AiOutlineFork, AiOutlineStar } from "react-icons/ai"
-import { FiSearch } from "react-icons/fi"
+import { FiCornerDownLeft, FiSearch } from "react-icons/fi"
 
 import LoadingDots from "../ui/Loading-dots/LoadingDots"
 import type { Stats } from "./types"
@@ -21,36 +20,10 @@ const HomepageHeader: React.FunctionComponent<Props> = ({
   isRequested
 }) => {
   return (
-    <header>
-      <div className="flex flex-col items-start justify-between lg:flex-row   lg:items-center">
-        <h1 className="font-headline text-2xl font-bold md:text-4xl">Poached</h1>
-        <div className="mt-1 flex space-x-3 lg:mt-0 lg:ml-3">
-          <a
-            href={stats.origin}
-            target="_blank"
-            className="flex items-center gap-x-1 py-1.5"
-            rel="noreferrer"
-          >
-            <AiOutlineStar className="h-5 w-5" />
-            {stats.starGazer}
-          </a>
-          <a
-            href={stats.forkUrl}
-            target="_blank"
-            className="flex items-center gap-x-1 rounded-2xl px-2 py-1.5"
-            rel="noreferrer"
-          >
-            <AiOutlineFork className="h-5 w-5" />
-            Fork
-          </a>
-        </div>
-      </div>
-      <h2 className="mt-4 text-gray-500 lg:mt-1">
-        Generate recipe without clutters from various websites with an ease.
-      </h2>
+    <header className="relative my-auto inline-flex h-full items-center">
       <form
         onSubmit={handleSubmitForm}
-        className="relative mx-auto mt-4 h-12 w-full rounded bg-white outline outline-1 outline-gray-200"
+        className="relative h-12 w-[350px] rounded-lg bg-dark-neutral"
       >
         <label htmlFor="urlKeyword" aria-label="urlKeyword">
           <FiSearch className="absolute left-5 top-1/2 hidden h-4 w-4 -translate-y-1/2 md:block" />
@@ -61,18 +34,19 @@ const HomepageHeader: React.FunctionComponent<Props> = ({
             setValue(event.currentTarget.value)
           }
           id="urlKeyword"
+          autoComplete="off"
           value={value || ""}
-          className="h-full w-[calc(100%-75px)] rounded bg-transparent pl-4 text-sm focus:outline-none md:w-[calc(100%-120px)] md:pl-12"
-          placeholder="https://example.com/creamy-courgette-potato-bake"
+          className="h-full rounded-lg bg-transparent pl-4 text-sm focus:outline-none md:w-[calc(100%-75px)] md:pl-12"
+          placeholder="Search recipe by url"
         />
         <button
           type="submit"
           id="submitUrl"
-          className="absolute right-1 top-1/2 -translate-y-1/2 rounded bg-[#8df1a6cf] py-2.5 px-2.5 text-sm text-black transition duration-200 ease-out hover:bg-[#7cd492cf] disabled:cursor-not-allowed md:px-6"
+          className="absolute right-1 top-1/2 -translate-y-1/2 rounded-lg bg-[#3e3f41] py-2.5 px-1 text-sm transition duration-200 ease-out hover:bg-[#7cd492cf] disabled:cursor-not-allowed disabled:hover:bg-[#3e3f41] md:px-6"
           disabled={!value || isRequested}
         >
-          <span className="hidden text-[hsl(144,40%,36%)] md:block">
-            {isRequested ? <LoadingDots /> : "Search"}
+          <span className="hidden md:block">
+            {isRequested ? <LoadingDots /> : <FiCornerDownLeft className="h-5 w-5" />}
           </span>
           <FiSearch className="block h-4 w-4 text-[hsl(144,40%,36%)] md:hidden" />
         </button>

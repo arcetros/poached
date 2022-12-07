@@ -33,7 +33,7 @@ const Navbar: React.FunctionComponent<{ isOpen: boolean; toggleNavBar: () => voi
     <nav className="relative z-50 flex w-full flex-col justify-between overflow-auto bg-dark-1 md:fixed md:h-full md:w-[15rem]">
       <div className="flex h-full w-full flex-col md:relative md:w-auto md:justify-between">
         <section>
-          <div className="border-neutral fixed z-50 flex w-full items-center justify-between border-b border-r border-dark-neutral bg-dark-1 py-6 px-5 md:relative md:w-auto">
+          <div className="border-neutral fixed z-50 flex h-20 w-full items-center justify-between border-b border-r border-dark-neutral bg-dark-1 px-5 md:relative md:w-auto">
             <h1 className="font-headline text-xl font-medium">Poached</h1>
             <div
               onClick={toggleNavBar}
@@ -48,7 +48,7 @@ const Navbar: React.FunctionComponent<{ isOpen: boolean; toggleNavBar: () => voi
               <li className="relative flex items-center space-x-3 pt-3">
                 <FiGrid className="h-5 w-5" />
                 <span className="text-sm">Dashboard</span>
-                <div className="absolute left-[-2rem] h-full w-[2px] bg-blue-500"></div>
+                <div className="absolute left-[-2rem] h-full w-[2px] bg-[hsl(144,40%,36%)]"></div>
               </li>
               <li className="flex items-center space-x-3 pt-3 text-neutral-500">
                 <FiBook className="h-5 w-5" />

@@ -21,11 +21,11 @@ const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data, url }) => {
   return (
     <article
       aria-label="recipe-data"
-      className="block grid-flow-row-dense grid-cols-12 gap-x-24 gap-y-16 lg:grid"
+      className="block grid-flow-row-dense grid-cols-12 gap-x-16 gap-y-16 lg:grid"
     >
-      <div className="col-start-6 col-end-12 mt-8 mb-8 h-fit lg:mb-0">
-        <h1 className="text-3xl font-bold lg:text-6xl">{data.name}</h1>
-        <span className="mt-2 flex text-gray-500">
+      <div className="col-start-6 col-end-13 mt-8 mb-8 h-fit lg:mb-0">
+        <h1 className="font-headline text-3xl font-bold lg:text-6xl">{data.name}</h1>
+        <span className="mt-2 flex text-neutral-500">
           from{" "}
           <a
             href={url}
@@ -42,7 +42,7 @@ const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data, url }) => {
           <LayoutDuration label="Cook" data={data.cookTime} />
           <LayoutDuration label="Prep" data={data.prepTime} />
         </dl>
-        <p className={clsx(data.description ? "block" : "hidden")}>{data.description}</p>
+        <p className={(clsx(data.description ? "block" : "hidden"), "mt-4")}>{data.description}</p>
       </div>
       {/* <section className="col-start-6 col-end-12 mb-8 h-fit lg:mb-0">
         <h5>
@@ -90,13 +90,13 @@ const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data, url }) => {
               <h5 id="ingredients-heading" className="text-2xl font-bold lg:text-3xl">
                 Ingredients
               </h5>
-              <h4 className="mt-1 text-gray-500">for {data.recipeYield} servings</h4>
+              <h4 className="mt-1 text-neutral-500">for {data.recipeYield} servings</h4>
             </div>
             <span className="text-xl font-bold">({data.recipeIngredients.length})</span>
           </header>
           <ul
             aria-labelledby="ingredients-heading"
-            className="scroll mt-8 grow divide-y overflow-auto lg:mt-4"
+            className="scroll mt-8 grow divide-y divide-dark-neutral overflow-auto lg:mt-4"
           >
             {uniqueIngredient.map((item: string) => {
               return (
@@ -108,7 +108,7 @@ const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data, url }) => {
           </ul>
         </section>
       </div>
-      <div className="col-start-6 col-end-12 mt-12 lg:mt-0">
+      <div className="col-start-6 col-end-13 mt-12 lg:mt-0">
         <div className="flex items-center justify-between">
           <h5 id="instructions-heading" className="text-2xl font-bold lg:text-3xl">
             Instructions
@@ -122,7 +122,7 @@ const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data, url }) => {
             data.recipeInstructions.map((item: string, id: number) => {
               return (
                 <li className="flex py-4 first:pt-2" key={item}>
-                  <div className="flex h-12 w-12 shrink-0 grow-0 basis-12 items-center justify-center rounded-full border-2 border-black">
+                  <div className="flex h-12 w-12 shrink-0 grow-0 basis-12 items-center justify-center rounded-full border-2 border-dark-neutral">
                     <span>{id + 1}</span>
                   </div>
                   <p className="ml-4">{item}</p>

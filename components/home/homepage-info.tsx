@@ -3,7 +3,7 @@ import { FiInfo } from "react-icons/fi"
 
 const HomepageInfo: React.FunctionComponent = () => {
   return (
-    <div className="flex items-start pt-8">
+    <div className="mt-auto flex w-full items-start bg-dark-1 px-8 py-8">
       <span className="rounded-full bg-[#4d68ff51] p-3">
         <FiInfo className="h-6 w-6 text-[hsl(226,74%,58%)]" />
       </span>

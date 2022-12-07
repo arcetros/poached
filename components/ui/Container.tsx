@@ -15,7 +15,7 @@ const Container: React.FunctionComponent<Props> = ({
   clean = false
 }) => {
   const rootClassName = cn(className, {
-    "max-w-6xl py-16 px-4 lg:px-16 w-full": !clean
+    "max-w-6xl py-16 px-4 lg:px-8 w-full": !clean
   })
 
   const Component: React.ComponentType<React.HTMLAttributes<HTMLElement>> = el as any

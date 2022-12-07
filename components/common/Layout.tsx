@@ -34,7 +34,7 @@ const Layout: React.FunctionComponent<Props> = ({ children }) => {
         <meta key="viewport" name="viewport" content="width=device-width, initial-scale=1" />
       </SEO>
       <Navbar isOpen={isNavbarOpen} toggleNavBar={toggleNavBar} />
-      <div className="w-full overflow-auto pt-[90px] md:pl-[15rem] md:pt-0">{children}</div>
+      <div className="w-full overflow-auto pt-[80px] md:pl-[15rem] md:pt-0">{children}</div>
     </main>
   )
 }
