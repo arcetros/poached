@@ -19,20 +19,12 @@ const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data, url }) => {
   const extractedDomain = extractDomain(url)
 
   return (
-    <article
-      aria-label="recipe-data"
-      className="block grid-flow-row-dense grid-cols-12 gap-x-16 gap-y-16 lg:grid"
-    >
+    <article aria-label="recipe-data" className="block grid-flow-row-dense grid-cols-12 gap-x-16 gap-y-16 lg:grid">
       <div className="col-start-6 col-end-13 mt-8 mb-8 h-fit lg:mb-0">
         <h1 className="font-headline text-3xl font-bold lg:text-6xl">{data.name}</h1>
         <span className="mt-2 flex text-neutral-500">
           from{" "}
-          <a
-            href={url}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center font-medium hover:underline"
-          >
+          <a href={url} target="_blank" rel="noreferrer" className="flex items-center font-medium hover:underline">
             <span className="ml-1">{extractedDomain}</span>
             <FiLink className="mx-1 h-4 w-4" />
           </a>
@@ -67,20 +59,9 @@ const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data, url }) => {
           </LayoutNutrients>
         </div>
       </section> */}
-      <div className="relative col-start-1 col-end-6 row-start-1 row-end-auto mx-[calc(1.5rem*-0.7)] mt-8 lg:mx-0">
+      <div className="relative col-start-1 col-end-6 row-start-1 row-end-auto mx-[calc(1.5rem*-0.65)] mt-8 lg:mx-0">
         <div className="left-0 top-0 w-full pt-[125%] lg:absolute">
-          <picture className="absolute left-0 top-0 h-full w-full">
-            {data?.image && (
-              <Image
-                alt={data.name}
-                src={data.image}
-                className="object-cover"
-                fill
-                sizes="1"
-                priority
-              />
-            )}
-          </picture>
+          <picture className="absolute left-0 top-0 h-full w-full">{data?.image && <Image alt={data.name} src={data.image} className="rounded-lg object-cover" fill sizes="1" priority />}</picture>
         </div>
       </div>
       <div className="col-start-1 col-end-6 row-start-1 row-end-7 mt-12 lg:mt-8">
@@ -94,10 +75,7 @@ const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data, url }) => {
             </div>
             <span className="text-xl font-bold">({data.recipeIngredients.length})</span>
           </header>
-          <ul
-            aria-labelledby="ingredients-heading"
-            className="scroll mt-8 grow divide-y divide-dark-neutral overflow-auto lg:mt-4"
-          >
+          <ul aria-labelledby="ingredients-heading" className="scroll mt-8 grow divide-y divide-dark-neutral overflow-auto lg:mt-4">
             {uniqueIngredient.map((item: string) => {
               return (
                 <li className="flex py-4 first:pt-2" key={item}>
@@ -113,9 +91,7 @@ const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data, url }) => {
           <h5 id="instructions-heading" className="text-2xl font-bold lg:text-3xl">
             Instructions
           </h5>
-          <span className="text-xl font-bold">
-            ({data.recipeInstructions && data.recipeInstructions.length})
-          </span>
+          <span className="text-xl font-bold">({data.recipeInstructions && data.recipeInstructions.length})</span>
         </div>
         <ol aria-labelledby="instructions-heading" className="mt-8 lg:mt-4">
           {data.recipeInstructions &&

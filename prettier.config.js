@@ -9,5 +9,5 @@ module.exports = {
   trailingComma: "none",
   semi: false,
   proseWrap: "always",
-  printWidth: 100
+  printWidth: 200
 }

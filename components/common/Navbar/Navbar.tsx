@@ -1,21 +1,9 @@
 import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock"
 import React from "react"
 import { BsGear } from "react-icons/bs"
-import {
-  FiAlignRight,
-  FiBook,
-  FiCalendar,
-  FiChevronDown,
-  FiGrid,
-  FiInfo,
-  FiMoon,
-  FiSun
-} from "react-icons/fi"
+import { FiAlignRight, FiBook, FiCalendar, FiChevronDown, FiGrid, FiInfo, FiMoon, FiSun } from "react-icons/fi"
 
-const Navbar: React.FunctionComponent<{ isOpen: boolean; toggleNavBar: () => void }> = ({
-  isOpen,
-  toggleNavBar
-}) => {
+const Navbar: React.FunctionComponent<{ isOpen: boolean; toggleNavBar: () => void }> = ({ isOpen, toggleNavBar }) => {
   const ref = React.useRef() as React.MutableRefObject<HTMLDivElement>
 
   React.useEffect(() => {
@@ -30,15 +18,12 @@ const Navbar: React.FunctionComponent<{ isOpen: boolean; toggleNavBar: () => voi
   }, [isOpen])
 
   return (
-    <nav className="relative z-50 flex w-full flex-col justify-between overflow-auto bg-dark-1 md:fixed md:h-full md:w-[15rem]">
+    <nav className="relative z-50 flex h-auto w-full flex-col justify-between overflow-auto bg-dark-1 md:fixed md:h-full md:w-[15rem]">
       <div className="flex h-full w-full flex-col md:relative md:w-auto md:justify-between">
         <section>
           <div className="border-neutral fixed z-50 flex h-20 w-full items-center justify-between border-b border-r border-dark-neutral bg-dark-1 px-5 md:relative md:w-auto">
             <h1 className="font-headline text-xl font-medium">Poached</h1>
-            <div
-              onClick={toggleNavBar}
-              className="block rounded border border-neutral-700 p-3 md:hidden"
-            >
+            <div onClick={toggleNavBar} className="block rounded border border-neutral-700 p-3 md:hidden">
               <FiAlignRight />
             </div>
           </div>
@@ -47,7 +32,7 @@ const Navbar: React.FunctionComponent<{ isOpen: boolean; toggleNavBar: () => voi
             <ol className="flex flex-col space-y-3 divide-y divide-dark-neutral py-4 px-5">
               <li className="relative flex items-center space-x-3 pt-3">
                 <FiGrid className="h-5 w-5" />
-                <span className="text-sm">Dashboard</span>
+                <span className="text-sm">Main</span>
                 <div className="absolute left-[-2rem] h-full w-[2px] bg-[hsl(144,40%,36%)]"></div>
               </li>
               <li className="flex items-center space-x-3 pt-3 text-neutral-500">
@@ -98,15 +83,15 @@ const Navbar: React.FunctionComponent<{ isOpen: boolean; toggleNavBar: () => voi
         </section>
       </div>
       {isOpen && (
-        <>
-          <div ref={ref} className="fixed top-[89px] z-50 w-full bg-dark-1 md:hidden">
-            <div className="flex-col justify-between py-6 md:flex">
+        <div className="fixed top-[80px] flex h-screen w-full flex-col overflow-auto">
+          <div ref={ref} className="z-50 flex flex-col overflow-scroll bg-dark-1 md:hidden">
+            <div className="flex-shrink-0 flex-col justify-between py-6 md:flex">
               <h5 className="px-5 text-sm text-neutral-500">MENU</h5>
               <ol className="flex flex-col space-y-3 divide-y divide-dark-neutral py-4 px-5">
                 <li className="relative flex items-center space-x-3 pt-3">
                   <FiGrid className="h-5 w-5" />
-                  <span className="text-sm">Dashboard</span>
-                  <div className="absolute left-[-2rem] h-full w-[2px] bg-blue-500"></div>
+                  <span className="text-sm">Main</span>
+                  <div className="absolute left-[-2rem] h-full w-[2px] bg-[hsl(144,40%,36%)]"></div>
                 </li>
                 <li className="flex items-center space-x-3 pt-3 text-neutral-500">
                   <FiBook className="h-5 w-5" />
@@ -154,11 +139,8 @@ const Navbar: React.FunctionComponent<{ isOpen: boolean; toggleNavBar: () => voi
               </div>
             </section>
           </div>
-          <div
-            className="fixed z-40 h-full w-full bg-dark-1 bg-opacity-80"
-            onClick={toggleNavBar}
-          ></div>
-        </>
+          <div className="fixed z-40 h-full w-full bg-dark-1 bg-opacity-80" onClick={toggleNavBar}></div>
+        </div>
       )}
     </nav>
   )
