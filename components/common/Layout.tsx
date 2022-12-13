@@ -1,4 +1,6 @@
 import React from "react"
+import { QueryClient, QueryClientProvider } from "react-query"
+import { ReactQueryDevtools } from "react-query/devtools"
 
 import Navbar from "./Navbar/Navbar"
 import SEO from "./SEO"
@@ -6,6 +8,8 @@ import SEO from "./SEO"
 type Props = {
   children: React.ReactNode
 }
+
+const queryClient = new QueryClient()
 
 const Layout: React.FunctionComponent<Props> = ({ children }) => {
   const [isNavbarOpen, setIsNavbarOpen] = React.useState<boolean>(false)
@@ -29,13 +33,16 @@ const Layout: React.FunctionComponent<Props> = ({ children }) => {
   }, [ref.current?.offsetWidth])
 
   return (
-    <main ref={ref} className="flex h-auto flex-col overflow-hidden md:h-screen md:flex-row">
-      <SEO>
-        <meta key="viewport" name="viewport" content="width=device-width, initial-scale=1" />
-      </SEO>
-      <Navbar isOpen={isNavbarOpen} toggleNavBar={toggleNavBar} />
-      <div className="h-screen w-full overflow-auto pt-[80px] md:pl-[15rem] md:pt-0">{children}</div>
-    </main>
+    <QueryClientProvider client={queryClient}>
+      <main ref={ref} className="flex h-auto flex-col overflow-hidden md:h-screen md:flex-row">
+        <SEO>
+          <meta key="viewport" name="viewport" content="width=device-width, initial-scale=1" />
+        </SEO>
+        <Navbar isOpen={isNavbarOpen} toggleNavBar={toggleNavBar} />
+        <div className="h-screen w-full overflow-auto pt-[80px] md:pl-[15rem] md:pt-0">{children}</div>
+      </main>
+      <ReactQueryDevtools initialIsOpen={true} />
+    </QueryClientProvider>
   )
 }
 
