@@ -11,6 +11,7 @@ import { Result } from "@/components/ui/recipe/recipe"
 import RecipeHeader from "@/components/ui/recipe/Recipe-header"
 import RecipeImportForm from "@/components/ui/recipe/Recipe-import-form"
 import Sidebar from "@/components/ui/Sidebar/Sidebar"
+import SidebarLayout from "@/components/ui/Sidebar/SidebarLayout"
 import { isValidHttpUrl } from "@/helpers/isValidHttp"
 import { RootSchema } from "@/types"
 
@@ -52,7 +53,7 @@ export const Home: NextPage = () => {
     router.push({ pathname: "/", query: `url=${decodeURI(query.url)}` })
   }
 
-  function handleOpenEdit() {
+  function handleCloseEdit() {
     setOnEdit(false)
   }
 
@@ -73,7 +74,11 @@ export const Home: NextPage = () => {
         {!isRequested && url && recipeData?.results && <RecipeLayout data={recipeData?.results} url={url} />}
         {!isRequested && url && !recipeData?.results && <RecipeUndefined {...importProps} />}
       </Container>
-      {onEdit && <Sidebar onClose={handleOpenEdit}>Kita bahagia</Sidebar>}
+      {onEdit && (
+        <Sidebar onClose={handleCloseEdit}>
+          <SidebarLayout handleClose={handleCloseEdit}>Kita bahagia</SidebarLayout>
+        </Sidebar>
+      )}
     </section>
   )
 }
