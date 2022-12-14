@@ -10,15 +10,19 @@ import { RecipeLayout, RecipeLayoutSkeleton, RecipeUndefined } from "@/component
 import { Result } from "@/components/ui/recipe/recipe"
 import RecipeHeader from "@/components/ui/recipe/Recipe-header"
 import RecipeImportForm from "@/components/ui/recipe/Recipe-import-form"
+import Sidebar from "@/components/ui/Sidebar/Sidebar"
 import { isValidHttpUrl } from "@/helpers/isValidHttp"
+import { RootSchema } from "@/types"
 
 export const Home: NextPage = () => {
   const router = useRouter()
-
   const { url } = router.query as QueryParam
-  const [inputVal, setInputVal] = React.useState<string>(url || "")
 
   const { isFetching: isRequested, data: recipeData } = useQuery<Result | undefined, Error>(["scrapRecipe", url], () => fetchRecipe(url), { refetchOnWindowFocus: false })
+
+  const [inputVal, setInputVal] = React.useState<string>(url || "")
+  const [recipe, setRecipe] = React.useState<RootSchema | undefined>(recipeData?.results)
+  const [onEdit, setOnEdit] = React.useState<boolean>(false)
 
   async function fetchRecipe(targetUrl: string): Promise<Result | undefined> {
     if (!url) {
@@ -43,16 +47,20 @@ export const Home: NextPage = () => {
     event.preventDefault()
     const query: { url: string } = { url: inputVal }
     if (!inputVal || !isValidHttpUrl(query.url)) {
-      alert("Make sure you entered valid url")
+      return alert("Make sure you entered valid url")
     }
     router.push({ pathname: "/", query: `url=${decodeURI(query.url)}` })
+  }
+
+  function handleOpenEdit() {
+    setOnEdit(false)
   }
 
   const importProps = { handleSubmitForm, isRequested, setValue: setInputVal, value: inputVal }
 
   return (
-    <section className="m-auto flex h-full flex-col">
-      {!isRequested && recipeData?.results && <RecipeHeader {...importProps} />}
+    <section className="relative m-auto flex h-full flex-col">
+      {!isRequested && recipeData?.results && <RecipeHeader {...importProps} setOnEdit={setOnEdit} />}
       <Container className="m-auto flex flex-col gap-y-8">
         {!url && !recipeData?.results && (
           <div className="m-auto flex max-w-xl flex-col items-center justify-center px-4 sm:px-0">
@@ -65,6 +73,7 @@ export const Home: NextPage = () => {
         {!isRequested && url && recipeData?.results && <RecipeLayout data={recipeData?.results} url={url} />}
         {!isRequested && url && !recipeData?.results && <RecipeUndefined {...importProps} />}
       </Container>
+      {onEdit && <Sidebar onClose={handleOpenEdit}>Kita bahagia</Sidebar>}
     </section>
   )
 }

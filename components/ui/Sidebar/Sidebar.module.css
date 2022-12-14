@@ -1,0 +1,14 @@
+.root {
+  @apply fixed inset-0 z-50 box-border h-full outline-none;
+}
+
+.sidebar {
+  @apply flex h-full flex-col overflow-y-auto overflow-x-hidden bg-dark-1 text-base shadow-xl;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.backdrop {
+  @apply absolute inset-0 bg-black bg-opacity-40 duration-100 ease-linear;
+  backdrop-filter: blur(0.8px);
+  -webkit-backdrop-filter: blur(0.8px);
+}

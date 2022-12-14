@@ -9,18 +9,6 @@ import { RootSchema } from "@/types"
 //   sugarContent?: string
 // }
 
-export type Recipe = {
-  author?: string
-  image?: string
-  description?: string
-  ingredients: string[]
-  instructions: string[]
-  name: string
-  nutritions?: Nutrients
-  servings: string | number
-  time: { prep: string | number; cook: string | number; total: string | number }
-}
-
 export type Result = {
   message: string
   status: boolean

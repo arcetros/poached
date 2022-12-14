@@ -1,4 +1,5 @@
 import React from "react"
+import { FieldValues, UseFormHandleSubmit, UseFormRegister } from "react-hook-form"
 import { FiCornerDownLeft, FiSearch } from "react-icons/fi"
 
 import LoadingDots from "../Loading-dots/LoadingDots"
@@ -10,9 +11,11 @@ type Props = {
   isRequested: boolean
   placeHolder?: string
   wfull?: boolean
+  register?: UseFormRegister<FieldValues>
+  handleSubmit?: UseFormHandleSubmit<FieldValues>
 }
 
-const RecipeImportForm: React.FunctionComponent<Props> = ({ handleSubmitForm, setValue, value, isRequested, wfull = false, placeHolder = "Paste the URL of a recipe" }) => {
+const RecipeImportForm: React.FunctionComponent<Props> = ({ handleSubmitForm, handleSubmit, setValue, value, isRequested, wfull = false, placeHolder = "Paste the URL of a recipe" }) => {
   return (
     <form onSubmit={handleSubmitForm} className={`relative top-0 h-12 rounded-lg bg-dark-neutral shadow-md lg:shadow-none ${wfull ? "w-full" : "w-full lg:w-[350px]"}`}>
       <label htmlFor="urlKeyword" aria-label="urlKeyword">
