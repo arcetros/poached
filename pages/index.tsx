@@ -1,7 +1,10 @@
+import clsx from "clsx"
 import type { NextPage } from "next"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import React from "react"
+import { Plus } from "react-feather"
+import { FiEdit } from "react-icons/fi"
 import { useQuery } from "react-query"
 
 import type { QueryParam } from "@/components/home/types"
@@ -25,6 +28,14 @@ export const Home: NextPage = () => {
   const [recipe, setRecipe] = React.useState<RootSchema | undefined>(recipeData?.results)
   const [onEdit, setOnEdit] = React.useState<boolean>(false)
 
+  const initialEdit = {
+    description: recipeData?.results.description ? (recipeData.results.description ? true : false) : false,
+    ingredients: false,
+    instructions: false
+  }
+
+  const [onEditFields, setOnEditFields] = React.useState<{ [key: string]: boolean }>(initialEdit)
+
   async function fetchRecipe(targetUrl: string): Promise<Result | undefined> {
     if (!url) {
       return undefined
@@ -41,6 +52,7 @@ export const Home: NextPage = () => {
 
     const recipe: Result = await response.json()
     setInputVal("")
+    setRecipe(recipe.results)
     return recipe
   }
 
@@ -59,6 +71,10 @@ export const Home: NextPage = () => {
 
   const importProps = { handleSubmitForm, isRequested, setValue: setInputVal, value: inputVal }
 
+  React.useEffect(() => {
+    setOnEditFields(initialEdit)
+  }, [recipeData])
+
   return (
     <section className="relative m-auto flex h-full flex-col">
       {!isRequested && recipeData?.results && <RecipeHeader {...importProps} setOnEdit={setOnEdit} />}
@@ -71,12 +87,112 @@ export const Home: NextPage = () => {
           </div>
         )}
         {isRequested && url && <RecipeLayoutSkeleton />}
-        {!isRequested && url && recipeData?.results && <RecipeLayout data={recipeData?.results} url={url} />}
+        {!isRequested && url && recipe && <RecipeLayout data={recipe} url={url} />}
         {!isRequested && url && !recipeData?.results && <RecipeUndefined {...importProps} />}
       </Container>
-      {onEdit && (
+      {recipe && onEdit && (
         <Sidebar onClose={handleCloseEdit}>
-          <SidebarLayout handleClose={handleCloseEdit}>Kita bahagia</SidebarLayout>
+          <SidebarLayout handleClose={handleCloseEdit}>
+            <div className="flex h-full flex-col justify-between">
+              <div className="flex flex-col px-4 pb-8">
+                <div className="border-b border-b-dark-neutral">
+                  <h1 className="mb-2 pb-2 font-headline text-2xl font-bold">Edit recipe</h1>
+                </div>
+                <div className="mt-6 flex flex-col">
+                  <label className="mb-1 font-primary text-sm text-neutral-400">Title</label>
+                  <div className="relative flex w-full flex-col rounded-md bg-dark-2">
+                    <input
+                      type="text"
+                      onChange={(event) => {
+                        setRecipe({ ...recipe, name: event.target.value })
+                      }}
+                      value={recipe?.name}
+                      placeholder="Recipe title"
+                      className={clsx("h-10 rounded-md bg-transparent p-2 text-sm focus:outline-none", recipe.description ? "w-full" : "w-[calc(100%-150px)]")}
+                    />
+                    {!recipe.description && (
+                      <button
+                        onClick={() => setOnEditFields({ ...onEditFields, description: !onEditFields.description })}
+                        className="absolute right-1 -top-3 translate-y-1/2 rounded-md bg-dark-1 py-1.5 px-3 text-sm transition duration-200 ease-out hover:bg-[#7cd492cf] disabled:cursor-not-allowed disabled:hover:bg-[#3e3f41]"
+                      >
+                        <span className="flex items-center space-x-1">
+                          <Plus className="h-4 w-4" />
+                          <span>Add Description</span>
+                        </span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+                {onEditFields.description && (
+                  <div className="mt-6 flex h-36 flex-col">
+                    <label className="mb-1 font-primary text-sm text-neutral-400">Description</label>
+                    <div className="relative flex h-full w-full flex-col rounded-md bg-dark-2">
+                      <textarea
+                        value={recipe?.description}
+                        placeholder="Describe recipe about"
+                        className="h-full w-full resize-none overflow-auto rounded-md bg-transparent p-2 text-sm focus:outline-none"
+                      />
+                    </div>
+                  </div>
+                )}
+                <div className="mt-4 flex flex-col">
+                  <label className="mb-1 font-primary text-sm text-neutral-400">Url</label>
+                  <div className="relative flex w-full flex-col rounded-md bg-dark-2">
+                    <input type="text" value={recipe?.url} placeholder="Recipe title" className="h-10 w-full rounded-md bg-transparent p-2 text-sm focus:outline-none" />
+                  </div>
+                </div>
+                <div className="mt-4 flex flex-col">
+                  <label className="mb-1 font-primary text-sm text-neutral-400">Yield</label>
+                  <div className="relative flex w-full flex-col rounded-md bg-dark-2">
+                    <input type="number" value={recipe?.recipeYield} placeholder="Recipe title" className="h-10 w-full rounded-md bg-transparent p-2 text-sm focus:outline-none" />
+                  </div>
+                </div>
+                <button
+                  onClick={() => setOnEditFields({ ...onEditFields, ingredients: !onEditFields.ingredients })}
+                  className="mt-4 flex items-center justify-center space-x-2 rounded-lg bg-dark-2 p-3 transition-all hover:bg-dark-neutral"
+                >
+                  <FiEdit className="h-4 w-4" /> <span className="text-sm">Edit Ingredients</span>
+                </button>
+                {onEditFields.ingredients && (
+                  <div className="mt-6 flex flex-col">
+                    <label className="mb-1 font-primary text-neutral-400">Ingredients</label>
+                    {recipe.recipeIngredients.map((ingredient) => (
+                      <input
+                        type="text"
+                        key={ingredient}
+                        value={ingredient}
+                        placeholder="Recipe title"
+                        className="h-10 w-[calc(100%-150px)] rounded-md bg-transparent p-2 text-sm focus:outline-none"
+                      />
+                    ))}
+                  </div>
+                )}
+                {recipe.recipeInstructions && (
+                  <>
+                    <button
+                      onClick={() => setOnEditFields({ ...onEditFields, instructions: !onEditFields.instructions })}
+                      className="mt-3 flex items-center justify-center space-x-2 rounded-lg bg-dark-2 p-3 transition-all hover:bg-dark-neutral"
+                    >
+                      <FiEdit className="h-4 w-4" /> <span className="text-sm">Edit Instructions</span>
+                    </button>
+                    {onEditFields.instructions && (
+                      <div className="mt-6 flex flex-col">
+                        <label className="mb-1 font-primary text-neutral-400">Instructions</label>
+                        {recipe?.recipeInstructions.map((instructions) => (
+                          <div key={instructions} placeholder="Recipe title" className="rounded-md bg-transparent p-2 text-sm focus:outline-none">
+                            {instructions}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+              <div className="p-4">
+                <button className="flex w-full items-center justify-center rounded-lg bg-[hsl(144,40%,36%)] px-4 py-3 text-lg font-bold transition-all hover:bg-[hsl(144,40%,29%)]">Save</button>
+              </div>
+            </div>
+          </SidebarLayout>
         </Sidebar>
       )}
     </section>

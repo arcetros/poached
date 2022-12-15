@@ -31,7 +31,7 @@ export async function scrapeRecipe(url: string) {
     } else {
       const recipe = await getRecipeData({ html: await (await fetch(url)).text() })
       if (recipe.data !== undefined) {
-        return recipe.data
+        return { ...recipe.data, url }
       }
       throw new Error(recipe.message)
     }
