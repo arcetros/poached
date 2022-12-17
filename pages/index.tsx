@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useRouter } from "next/router"
 import React from "react"
 import { Plus } from "react-feather"
+import { useForm } from "react-hook-form"
 import { FiEdit } from "react-icons/fi"
 import { useQuery } from "react-query"
 
@@ -29,12 +30,16 @@ export const Home: NextPage = () => {
   const [onEdit, setOnEdit] = React.useState<boolean>(false)
 
   const initialEdit = {
-    description: recipeData?.results.description ? (recipeData.results.description ? true : false) : false,
+    description: recipeData?.results?.description ? (recipeData.results?.description ? true : false) : false,
     ingredients: false,
     instructions: false
   }
 
   const [onEditFields, setOnEditFields] = React.useState<{ [key: string]: boolean }>(initialEdit)
+
+  const { register, handleSubmit, setValue, reset } = useForm<RootSchema>({
+    defaultValues: recipe
+  })
 
   async function fetchRecipe(targetUrl: string): Promise<Result | undefined> {
     if (!url) {
@@ -53,6 +58,7 @@ export const Home: NextPage = () => {
     const recipe: Result = await response.json()
     setInputVal("")
     setRecipe(recipe.results)
+    reset(recipe.results)
     return recipe
   }
 
@@ -67,6 +73,15 @@ export const Home: NextPage = () => {
 
   function handleCloseEdit() {
     setOnEdit(false)
+  }
+
+  function handleDescriptionToggle() {
+    if (onEditFields.description) {
+      setOnEditFields({ ...onEditFields, description: false })
+      setValue("description", undefined)
+      return
+    }
+    setOnEditFields({ ...onEditFields, description: true })
   }
 
   const importProps = { handleSubmitForm, isRequested, setValue: setInputVal, value: inputVal }
@@ -87,13 +102,19 @@ export const Home: NextPage = () => {
           </div>
         )}
         {isRequested && url && <RecipeLayoutSkeleton />}
-        {!isRequested && url && recipe && <RecipeLayout data={recipe} url={url} />}
+        {!isRequested && url && recipe && <RecipeLayout data={recipe} />}
         {!isRequested && url && !recipeData?.results && <RecipeUndefined {...importProps} />}
       </Container>
       {recipe && onEdit && (
         <Sidebar onClose={handleCloseEdit}>
           <SidebarLayout handleClose={handleCloseEdit}>
-            <div className="flex h-full flex-col justify-between">
+            <form
+              onSubmit={handleSubmit((data) => {
+                setRecipe(data)
+                console.log(data)
+              })}
+              className="flex h-full flex-col justify-between"
+            >
               <div className="flex flex-col px-4 pb-8">
                 <div className="border-b border-b-dark-neutral">
                   <h1 className="mb-2 pb-2 font-headline text-2xl font-bold">Edit recipe</h1>
@@ -102,25 +123,22 @@ export const Home: NextPage = () => {
                   <label className="mb-1 font-primary text-sm text-neutral-400">Title</label>
                   <div className="relative flex w-full flex-col rounded-md bg-dark-2">
                     <input
+                      {...register("name")}
                       type="text"
-                      onChange={(event) => {
-                        setRecipe({ ...recipe, name: event.target.value })
-                      }}
-                      value={recipe?.name}
+                      name="name"
                       placeholder="Recipe title"
-                      className={clsx("h-10 rounded-md bg-transparent p-2 text-sm focus:outline-none", recipe.description ? "w-full" : "w-[calc(100%-150px)]")}
+                      className={clsx("h-10 rounded-md bg-transparent p-2 text-sm focus:outline-none", onEditFields.description ? "w-[calc(100%-170px)]" : "w-[calc(100%-150px)]")}
                     />
-                    {!recipe.description && (
-                      <button
-                        onClick={() => setOnEditFields({ ...onEditFields, description: !onEditFields.description })}
-                        className="absolute right-1 -top-3 translate-y-1/2 rounded-md bg-dark-1 py-1.5 px-3 text-sm transition duration-200 ease-out hover:bg-[#7cd492cf] disabled:cursor-not-allowed disabled:hover:bg-[#3e3f41]"
-                      >
-                        <span className="flex items-center space-x-1">
-                          <Plus className="h-4 w-4" />
-                          <span>Add Description</span>
-                        </span>
-                      </button>
-                    )}
+                    <button
+                      onClick={handleDescriptionToggle}
+                      type="button"
+                      className="absolute right-1 -top-3 translate-y-1/2 rounded-md bg-dark-1 py-1.5 px-3 text-sm transition duration-200 ease-out hover:bg-[#7cd492cf] disabled:cursor-not-allowed disabled:hover:bg-[#3e3f41]"
+                    >
+                      <span className="flex items-center space-x-1">
+                        <Plus className="h-4 w-4" />
+                        <span>{onEditFields.description ? "Remove" : "Add"} Description</span>
+                      </span>
+                    </button>
                   </div>
                 </div>
                 {onEditFields.description && (
@@ -128,7 +146,8 @@ export const Home: NextPage = () => {
                     <label className="mb-1 font-primary text-sm text-neutral-400">Description</label>
                     <div className="relative flex h-full w-full flex-col rounded-md bg-dark-2">
                       <textarea
-                        value={recipe?.description}
+                        {...register("description")}
+                        name="description"
                         placeholder="Describe recipe about"
                         className="h-full w-full resize-none overflow-auto rounded-md bg-transparent p-2 text-sm focus:outline-none"
                       />
@@ -138,13 +157,13 @@ export const Home: NextPage = () => {
                 <div className="mt-4 flex flex-col">
                   <label className="mb-1 font-primary text-sm text-neutral-400">Url</label>
                   <div className="relative flex w-full flex-col rounded-md bg-dark-2">
-                    <input type="text" value={recipe?.url} placeholder="Recipe title" className="h-10 w-full rounded-md bg-transparent p-2 text-sm focus:outline-none" />
+                    <input type="text" {...register("url")} placeholder="Recipe title" className="h-10 w-full rounded-md bg-transparent p-2 text-sm focus:outline-none" />
                   </div>
                 </div>
                 <div className="mt-4 flex flex-col">
                   <label className="mb-1 font-primary text-sm text-neutral-400">Yield</label>
                   <div className="relative flex w-full flex-col rounded-md bg-dark-2">
-                    <input type="number" value={recipe?.recipeYield} placeholder="Recipe title" className="h-10 w-full rounded-md bg-transparent p-2 text-sm focus:outline-none" />
+                    <input type="number" {...register("recipeYield")} placeholder="Recipe title" className="h-10 w-full rounded-md bg-transparent p-2 text-sm focus:outline-none" />
                   </div>
                 </div>
                 <button
@@ -156,11 +175,11 @@ export const Home: NextPage = () => {
                 {onEditFields.ingredients && (
                   <div className="mt-6 flex flex-col">
                     <label className="mb-1 font-primary text-neutral-400">Ingredients</label>
-                    {recipe.recipeIngredients.map((ingredient) => (
+                    {recipe.recipeIngredients.map((ingredient, id) => (
                       <input
                         type="text"
-                        key={ingredient}
-                        value={ingredient}
+                        {...register(`recipeIngredients.${id}`)}
+                        key={id}
                         placeholder="Recipe title"
                         className="h-10 w-[calc(100%-150px)] rounded-md bg-transparent p-2 text-sm focus:outline-none"
                       />
@@ -178,8 +197,16 @@ export const Home: NextPage = () => {
                     {onEditFields.instructions && (
                       <div className="mt-6 flex flex-col">
                         <label className="mb-1 font-primary text-neutral-400">Instructions</label>
-                        {recipe?.recipeInstructions.map((instructions) => (
-                          <div key={instructions} placeholder="Recipe title" className="rounded-md bg-transparent p-2 text-sm focus:outline-none">
+                        {recipe?.recipeInstructions.map((instructions, id) => (
+                          <div
+                            contentEditable
+                            onInput={(event) => {
+                              setValue(`recipeInstructions.${id}`, event.currentTarget.textContent as string, { shouldValidate: true })
+                            }}
+                            key={instructions}
+                            draggable
+                            className="rounded-md bg-transparent p-2 text-sm focus:outline-none"
+                          >
                             {instructions}
                           </div>
                         ))}
@@ -189,9 +216,11 @@ export const Home: NextPage = () => {
                 )}
               </div>
               <div className="p-4">
-                <button className="flex w-full items-center justify-center rounded-lg bg-[hsl(144,40%,36%)] px-4 py-3 text-lg font-bold transition-all hover:bg-[hsl(144,40%,29%)]">Save</button>
+                <button type="submit" className="flex w-full items-center justify-center rounded-lg bg-[hsl(144,40%,36%)] px-4 py-3 text-lg font-bold transition-all hover:bg-[hsl(144,40%,29%)]">
+                  Save
+                </button>
               </div>
-            </div>
+            </form>
           </SidebarLayout>
         </Sidebar>
       )}

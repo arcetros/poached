@@ -11,12 +11,11 @@ import LayoutDuration from "./layouts/Layout-duration"
 
 type RecipeInner = {
   data: RootSchema
-  url: string
 }
 
-const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data, url }) => {
+const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data }) => {
   const uniqueIngredient = Array.from(new Set(data.recipeIngredients))
-  const extractedDomain = extractDomain(url)
+  const extractedDomain = data.url && extractDomain(data.url)
 
   return (
     <article aria-label="recipe-data" className="block grid-flow-row-dense grid-cols-12 gap-x-16 gap-y-16 lg:grid">
@@ -24,7 +23,7 @@ const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data, url }) => {
         <h1 className="font-headline text-3xl font-bold lg:text-5xl">{data.name}</h1>
         <span className="mt-2 flex text-neutral-500">
           from{" "}
-          <a href={url} target="_blank" rel="noreferrer" className="flex items-center font-medium hover:underline">
+          <a href={data.url} target="_blank" rel="noreferrer" className="flex items-center font-medium hover:underline">
             <span className="ml-1">{extractedDomain}</span>
             <FiLink className="mx-1 h-4 w-4" />
           </a>
