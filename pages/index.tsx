@@ -115,18 +115,28 @@ export const Home: NextPage = () => {
     if (onEditFields.ingredients) {
       setTimeout(() => {
         const ingredients = getValues().recipeIngredients
-        ingredientRef.current[ingredients.length - 1]?.focus()
+        const lastEl = ingredientRef.current[ingredients.length - 1]
+        if (lastEl) {
+          lastEl.focus()
+          window.getSelection()?.selectAllChildren(lastEl)
+          window.getSelection()?.collapseToEnd()
+        }
       }, 0)
     }
     if (onEditFields.instructions) {
       setTimeout(() => {
         const instructions = getValues().recipeInstructions
         if (instructions) {
-          instructionsRef.current[instructions.length - 1]?.focus()
+          const lastEl = instructionsRef.current[instructions.length - 1]
+          if (lastEl) {
+            lastEl.focus()
+            window.getSelection()?.selectAllChildren(lastEl)
+            window.getSelection()?.collapseToEnd()
+          }
         }
       }, 0)
     }
-  }, [ingredientFields, onEditFields.ingredients])
+  }, [ingredientFields, instructionFields, onEditFields.ingredients, onEditFields.instructions])
 
   return (
     <section className="relative m-auto flex h-full flex-col">
