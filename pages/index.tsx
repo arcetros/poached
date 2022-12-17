@@ -4,7 +4,7 @@ import Image from "next/image"
 import { useRouter } from "next/router"
 import React from "react"
 import { Plus } from "react-feather"
-import { useForm } from "react-hook-form"
+import { useFieldArray, useForm } from "react-hook-form"
 import { FiEdit } from "react-icons/fi"
 import { useQuery } from "react-query"
 
@@ -37,9 +37,30 @@ export const Home: NextPage = () => {
 
   const [onEditFields, setOnEditFields] = React.useState<{ [key: string]: boolean }>(initialEdit)
 
-  const { register, handleSubmit, setValue, reset } = useForm<RootSchema>({
+  const { register, handleSubmit, setValue, reset, control, getValues } = useForm<RootSchema>({
     defaultValues: recipe
   })
+
+  const {
+    fields: ingredientFields,
+    append: appendIngredient,
+    remove: removeIngredient
+  } = useFieldArray<RootSchema>({
+    control,
+    name: "recipeIngredients"
+  })
+
+  const {
+    fields: instructionFields,
+    append: appendInstruction,
+    remove: removeInstruction
+  } = useFieldArray<RootSchema>({
+    control,
+    name: "recipeInstructions"
+  })
+
+  const ingredientRef = React.useRef<(HTMLLIElement | null)[]>([])
+  const instructionsRef = React.useRef<(HTMLOListElement | null)[]>([])
 
   async function fetchRecipe(targetUrl: string): Promise<Result | undefined> {
     if (!url) {
@@ -90,6 +111,23 @@ export const Home: NextPage = () => {
     setOnEditFields(initialEdit)
   }, [recipeData])
 
+  React.useEffect(() => {
+    if (onEditFields.ingredients) {
+      setTimeout(() => {
+        const ingredients = getValues().recipeIngredients
+        ingredientRef.current[ingredients.length - 1]?.focus()
+      }, 0)
+    }
+    if (onEditFields.instructions) {
+      setTimeout(() => {
+        const instructions = getValues().recipeInstructions
+        if (instructions) {
+          instructionsRef.current[instructions.length - 1]?.focus()
+        }
+      }, 0)
+    }
+  }, [ingredientFields, onEditFields.ingredients])
+
   return (
     <section className="relative m-auto flex h-full flex-col">
       {!isRequested && recipeData?.results && <RecipeHeader {...importProps} setOnEdit={setOnEdit} />}
@@ -111,7 +149,7 @@ export const Home: NextPage = () => {
             <form
               onSubmit={handleSubmit((data) => {
                 setRecipe(data)
-                console.log(data)
+                reset(data)
               })}
               className="flex h-full flex-col justify-between"
             >
@@ -173,18 +211,38 @@ export const Home: NextPage = () => {
                   <FiEdit className="h-4 w-4" /> <span className="text-sm">Edit Ingredients</span>
                 </button>
                 {onEditFields.ingredients && (
-                  <div className="mt-6 flex flex-col">
+                  <ul className="mt-6 flex flex-col">
                     <label className="mb-1 font-primary text-neutral-400">Ingredients</label>
-                    {recipe.recipeIngredients.map((ingredient, id) => (
-                      <input
-                        type="text"
-                        {...register(`recipeIngredients.${id}`)}
-                        key={id}
-                        placeholder="Recipe title"
-                        className="h-10 w-[calc(100%-150px)] rounded-md bg-transparent p-2 text-sm focus:outline-none"
-                      />
+                    {ingredientFields.map((ingredient, id) => (
+                      <li
+                        suppressContentEditableWarning
+                        ref={(val) => (ingredientRef.current[id] = val)}
+                        onKeyDown={(event) => {
+                          if (event.code === "Enter") {
+                            event.preventDefault()
+                            appendIngredient({ item: "", id: ingredientFields.length })
+                          }
+                          if (event.code === "Backspace" && event.currentTarget.textContent === "") {
+                            removeIngredient(id)
+                          }
+                        }}
+                        contentEditable
+                        onInput={(event) => {
+                          setValue(`recipeIngredients.${id}`, { id, item: event.currentTarget.textContent as string }, { shouldValidate: true })
+                        }}
+                        key={ingredient.id}
+                        className="py-2 text-sm"
+                      >
+                        {ingredient.item}
+                      </li>
                     ))}
-                  </div>
+                    <button
+                      onClick={() => appendIngredient({ item: "", id: ingredientFields.length })}
+                      className="my-3 flex w-full items-center justify-center rounded-lg py-2 outline outline-dark-neutral"
+                    >
+                      Add ingredient
+                    </button>
+                  </ul>
                 )}
                 {recipe.recipeInstructions && (
                   <>
@@ -195,22 +253,38 @@ export const Home: NextPage = () => {
                       <FiEdit className="h-4 w-4" /> <span className="text-sm">Edit Instructions</span>
                     </button>
                     {onEditFields.instructions && (
-                      <div className="mt-6 flex flex-col">
+                      <ul className="mt-6 flex flex-col">
                         <label className="mb-1 font-primary text-neutral-400">Instructions</label>
-                        {recipe?.recipeInstructions.map((instructions, id) => (
-                          <div
+                        {instructionFields.map((instructions, id) => (
+                          <ol
+                            suppressContentEditableWarning
                             contentEditable
+                            ref={(val) => (instructionsRef.current[id] = val)}
                             onInput={(event) => {
-                              setValue(`recipeInstructions.${id}`, event.currentTarget.textContent as string, { shouldValidate: true })
+                              setValue(`recipeInstructions.${id}`, { id: id, item: event.currentTarget.textContent as string }, { shouldValidate: true })
                             }}
-                            key={instructions}
-                            draggable
+                            onKeyDown={(event) => {
+                              if (event.code === "Enter") {
+                                event.preventDefault()
+                                appendInstruction({ item: "", id: ingredientFields.length })
+                              }
+                              if (event.code === "Backspace" && event.currentTarget.textContent === "") {
+                                removeInstruction(id)
+                              }
+                            }}
+                            key={instructions.id}
                             className="rounded-md bg-transparent p-2 text-sm focus:outline-none"
                           >
-                            {instructions}
-                          </div>
+                            {instructions.item}
+                          </ol>
                         ))}
-                      </div>
+                        <button
+                          onClick={() => appendInstruction({ item: "", id: instructionFields.length })}
+                          className="my-3 flex w-full items-center justify-center rounded-lg py-2 outline outline-dark-neutral"
+                        >
+                          Add Instruction
+                        </button>
+                      </ul>
                     )}
                   </>
                 )}

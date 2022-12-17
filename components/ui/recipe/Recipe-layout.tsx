@@ -52,10 +52,10 @@ const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data }) => {
             <span className="text-xl font-bold">({data.recipeIngredients.length})</span>
           </header>
           <ul aria-labelledby="ingredients-heading" className="scroll mt-8 grow divide-y divide-dark-neutral overflow-auto lg:mt-4">
-            {uniqueIngredient.map((item: string) => {
+            {uniqueIngredient.map((item) => {
               return (
-                <li className="flex py-4 first:pt-2" key={item}>
-                  <label className="flex items-center">{item}</label>
+                <li className="flex py-4 first:pt-2" key={item.id}>
+                  <label className="flex items-center">{item.item}</label>
                 </li>
               )
             })}
@@ -71,13 +71,13 @@ const RecipeLayout: React.FunctionComponent<RecipeInner> = ({ data }) => {
         </div>
         <ol aria-labelledby="instructions-heading" className="mt-8 lg:mt-4">
           {data.recipeInstructions &&
-            data.recipeInstructions.map((item: string, id: number) => {
+            data.recipeInstructions.map((item, id) => {
               return (
-                <li className="flex py-4 first:pt-2" key={item}>
+                <li className="flex py-4 first:pt-2" key={item.id}>
                   <div className="flex h-12 w-12 shrink-0 grow-0 basis-12 items-center justify-center rounded-full border-2 border-dark-neutral">
                     <span>{id + 1}</span>
                   </div>
-                  <p className="ml-4">{item}</p>
+                  <p className="ml-4">{item.item}</p>
                 </li>
               )
             })}

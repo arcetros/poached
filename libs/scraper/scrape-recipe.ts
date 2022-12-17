@@ -24,14 +24,22 @@ export async function scrapeRecipe(url: string) {
       if (domains[parse] !== undefined) {
         return fetch(url).then(async (response) => {
           const html = await response.text()
-          return domains[parse](html)
+          return { ...domains[parse](html), url }
         })
       }
       throw new Error("Site is not yet supported")
     } else {
       const recipe = await getRecipeData({ html: await (await fetch(url)).text() })
       if (recipe.data !== undefined) {
-        return { ...recipe.data, url }
+        const recipeData = recipe.data
+        const newIngredients = recipeData.recipeIngredients.map((ingredient, id) => {
+          return { id: id, item: ingredient }
+        })
+        const newInstructions = recipeData.recipeInstructions.map((instruction, id) => {
+          return { id: id, item: instruction }
+        })
+
+        return { ...recipe.data, recipeIngredients: newIngredients, recipeInstructions: newInstructions, url }
       }
       throw new Error(recipe.message)
     }
